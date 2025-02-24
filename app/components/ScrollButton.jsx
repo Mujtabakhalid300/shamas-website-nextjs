@@ -1,8 +1,8 @@
 "use client";
 
-export default function ScrollButton() {
+export default function ScrollButton({sectionName}) {
   const handleScroll = () => {
-    const nextSection = document.getElementById("next-section");
+    const nextSection = document.getElementById(sectionName);
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" });
     }

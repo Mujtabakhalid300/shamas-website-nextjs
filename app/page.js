@@ -29,15 +29,20 @@ export default function Home() {
         </h3>
 
         {/* Scroll Down Button */}
-        <ScrollButton/>
+        <ScrollButton sectionName={"img-section"}/>
       </section>
 
       {/* Next Section */}
       <section
-        id="next-section"
-        className="relative w-full h-screen bg-white flex items-center justify-center"
+        id="img-section"
+        className="relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col "
       >
-        <h2 className="text-black text-3xl font-bold">Next Section</h2>
+        <h2 className="text-white text-center text-3xl font-bold mt-20">Shaping the <br></br>skyline</h2>
+        <h3 className="text-white text-xl md:text-3xl font-bold text-center">Shamasco has redefined the New York City skyline with an impressive portfolio of residential, office, hospitality, and mixed-use properties. These iconic properties have raised the benchmark and continue to set the standards of real estate development.</h3>
+        <ScrollButton sectionName={"stats-section"}/>
+      </section>
+      <section id="stats-section" className="relative w-full h-screen bg-white flex flex-col">
+        HELLO
       </section>
     </main>
   );
