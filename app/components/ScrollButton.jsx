@@ -11,7 +11,7 @@ export default function ScrollButton({sectionName}) {
   return (
     <button
       onClick={handleScroll}
-      className="absolute bottom-20 animate-bounce text-white bg-opacity-50 p-3 rounded-full border border-white"
+      className="absolute bottom-24  text-white bg-opacity-50 p-3 rounded-full border border-white"
     >
       ↓ Scroll Down
     </button>
