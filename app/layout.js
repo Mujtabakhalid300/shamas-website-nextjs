@@ -41,9 +41,10 @@ export default function RootLayout({ children }) {
         ) : (
           <>
             {/* Sticky Navbar */}
-            <div className="sticky top-0 left-0 w-full bg-originalBlue text-white p-4 border-b-2 border-white z-50">
-              <div className="flex justify-between md:justify-around items-center">
-                <div className="text-xl font-bold">SHAMAS</div>
+            <div className="sticky top-0 left-0 w-full bg-originalBlue text-white  border-b-[0.5px] border-opacity-50 border-white z-50">
+              <div className="hidden md:flex bg-originalBlue text-white text-center border-b-[0.5px] border-opacity-50 border-white items-center justify-center py-3"><img className="h-8" src="/navbarLogo.png" /></div>
+              <div className="flex justify-between md:justify-around items-center p-3">
+                <img className="md:hidden h-8" src="/navbarLogo.png" />
 
                 {/* Desktop Menu (Hidden on small screens) */}
                 <div className="hidden md:flex gap-6">
