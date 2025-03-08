@@ -1,8 +1,9 @@
 "use client";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,11 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700", "900"],
 });
 
 export default function RootLayout({ children }) {
@@ -41,18 +47,45 @@ export default function RootLayout({ children }) {
         ) : (
           <>
             {/* Sticky Navbar */}
-            <div className="sticky top-0 left-0 w-full bg-originalBlue text-white  border-b-[0.5px] border-opacity-50 border-white z-50">
-              <div className="hidden md:flex bg-originalBlue text-white text-center border-b-[0.5px] border-opacity-50 border-white items-center justify-center py-3"><img className="h-8" src="/navbarLogo.png" /></div>
-              <div className="flex justify-between md:justify-around items-center p-3">
+            <div className="sticky top-0 left-0 w-full bg-originalBlue text-white   z-50">
+              <div className="hidden md:flex bg-originalBlue text-white text-center border-b-[0.5px] border-opacity-50 border-white items-center justify-center py-3">
+                <img className="h-8" src="/navbarLogo.png" />
+              </div>
+              <div className="flex justify-between md:justify-around items-center ">
                 <img className="md:hidden h-8" src="/navbarLogo.png" />
 
                 {/* Desktop Menu (Hidden on small screens) */}
-                <div className="hidden md:flex gap-6">
-                  <Link href="#">OVERVIEW</Link>
-                  <Link href="#">PORTFOLIO</Link>
-                  <Link href="#">AVAILABILITY</Link>
-                  <Link href="#">MANAGEMENT</Link>
-                  <Link href="#">CONTACT</Link>
+                <div className="hidden md:flex  h-full">
+                  <Link
+                    href="#"
+                    className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+                  >
+                    OVERVIEW
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+                  >
+                    PORTFOLIO
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+                  >
+                    AVAILABILITY
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+                  >
+                    MANAGEMENT
+                  </Link>
+                  <Link
+                    href="#"
+                    className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+                  >
+                    CONTACT
+                  </Link>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -140,6 +173,7 @@ export default function RootLayout({ children }) {
             <div>{children}</div>
           </>
         )}
+        <Footer />
       </body>
     </html>
   );
