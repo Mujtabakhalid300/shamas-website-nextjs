@@ -10,7 +10,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        originalBlue: "var(--original-blue)"
+        originalBlue: "var(--original-blue)",
+        navbarFocusBlue: "var(--navbarFocusBlue)",
       },
     },
   },

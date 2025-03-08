@@ -1,5 +1,10 @@
 import ScrollButton from "./components/ScrollButton";
-import { Gothic_A1, Libre_Baskerville, Lora, Playfair_Display } from "next/font/google";
+import {
+  Gothic_A1,
+  Libre_Baskerville,
+  Lora,
+  Playfair_Display,
+} from "next/font/google";
 
 const gothic_A1 = Gothic_A1({
   subsets: ["latin"],
@@ -76,14 +81,19 @@ export default function Home() {
 
       <section
         id="stats-section"
-        className="pt-10 px-4  w-full  bg-white flex flex-col  items-center"
+        className="pt-20 md:pt-32 px-4  w-full  bg-white flex flex-col  items-center"
       >
-        <div className={`${playfair_display.className} font-[700] my-10 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl `}>
-COMPANY OVERVIEW        </div>
+        <div
+          className={`${playfair_display.className} font-[700] my-10 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl `}
+        >
+          COMPANY OVERVIEW{" "}
+        </div>
         <div className="flex flex-col md:flex-row my-10 gap-10">
           <div className="flex flex-col items-center">
             <div className={`${lora.className} text-7xl md:text-9xl`}>20M+</div>
-            <div className={`${gothic_A1.className} font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`} >
+            <div
+              className={`${gothic_A1.className} font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}
+            >
               Gross Square Feet of Past <br />
               and Future Developments
             </div>
@@ -92,13 +102,17 @@ COMPANY OVERVIEW        </div>
 
           <div className="flex flex-col items-center">
             <div className={`${lora.className} text-7xl md:text-9xl`}>1989</div>
-            <div className={`${gothic_A1.className} font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}>
+            <div
+              className={`${gothic_A1.className} font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}
+            >
               Year Founded
             </div>
           </div>
         </div>
         <div className="my-10">
-          <div className={`${gothic_A1.className} my-2 font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}>
+          <div
+            className={`${gothic_A1.className} my-2 font-[400] text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}
+          >
             Extell is a full-service development company driven by an internal
             team of talented real estate professionals whose combined breadth of
             experience includes all areas of real estate development. Clear
@@ -106,7 +120,9 @@ COMPANY OVERVIEW        </div>
             acquire, finance, develop, market, and manage the most sophisticated
             development projects.
           </div>
-          <div className={`${gothic_A1.className} font-[400] my-2 text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}>
+          <div
+            className={`${gothic_A1.className} font-[400] my-2 text-base sm:text-lg md:text-xl lg:text-2xl  text-center max-w-3xl mx-auto`}
+          >
             The Extell success story includes developing some of the world’s
             most elevated residences and redefining luxury development
             throughout New York City. Our portfolio continues to expand
