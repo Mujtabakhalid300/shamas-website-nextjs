@@ -1,4 +1,5 @@
 "use client";
+import { ChevronDown } from "lucide-react";
 
 export default function ScrollButton({sectionName,bottom}) {
   const handleScroll = () => {
@@ -9,11 +10,14 @@ export default function ScrollButton({sectionName,bottom}) {
   };
 
   return (
+    <>
+
     <button
       onClick={handleScroll}
-      className={`absolute bottom-12   text-white bg-opacity-50 p-3 rounded-full border border-white`}
-    >
-      ↓ Scroll Down
+      className={`absolute -bottom-5   text-white bg-opacity-50 `}
+      > 
+     <ChevronDown size={100} strokeWidth={0.75} />
     </button>
+      </>
   );
 }

@@ -47,13 +47,13 @@ export default function RootLayout({ children }) {
                 {/* Desktop Menu (Hidden on small screens) */}
                 <div className="hidden md:flex  h-full">
                   <Link
-                    href="#"
+                    href="/"
                     className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
                   >
                     OVERVIEW
                   </Link>
                   <Link
-                    href="#"
+                    href="/portfolio"
                     className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
                   >
                     PORTFOLIO
