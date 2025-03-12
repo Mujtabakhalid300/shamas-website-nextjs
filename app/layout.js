@@ -37,7 +37,10 @@ export default function RootLayout({ children }) {
         ) : (
           <>
             {/* Sticky Navbar */}
-            <div className="sticky top-0 left-0 w-full bg-originalBlue text-white   z-50">
+            <div
+              id="navbar"
+              className="sticky top-0 left-0 w-full bg-originalBlue text-white   z-50"
+            >
               <div className="hidden md:flex bg-originalBlue text-white text-center border-b-[0.5px] border-opacity-50 border-white items-center justify-center py-3">
                 <img className="h-8" src="/navbarLogo.png" />
               </div>

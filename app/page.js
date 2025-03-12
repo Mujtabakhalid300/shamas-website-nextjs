@@ -1,3 +1,4 @@
+import MainPageVideo from "./components/MainPageVideo";
 import ScrollButton from "./components/ScrollButton";
 import {
   Gothic_A1,
@@ -30,20 +31,10 @@ export default function Home() {
   return (
     <main className="relative scroll-smooth">
       {/* Video Background (Fixed) */}
-      <div className="fixed top-0 left-0 w-full h-screen overflow-hidden -z-10">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/overview.webm" type="video/webm" />
-        </video>
-      </div>
+      <MainPageVideo />
 
       {/* Hero Section */}
-      <section className="px-4 relative w-full h-[95vh] md:h-[90vh] flex flex-col items-center justify-center bg-black bg-opacity-40">
+      <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
         <img className=" w-2/3 md:max-w-xl z-10" src="/navbarLogo.png" />
         <h3
           className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
@@ -58,7 +49,7 @@ export default function Home() {
       {/* Next Section */}
       <section
         id="img-section"
-        className="pt-20 md:pt-32 px-4 relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
+        className="pt-8 md:pt-32 px-4 relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
       >
         <h2
           className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-2xl sm:text-3xl md:text-5xl  font-[400]`}
@@ -81,16 +72,16 @@ export default function Home() {
 
       <section
         id="stats-section"
-        className="pt-20 md:pt-32 px-4  w-full  bg-white flex flex-col  items-center"
+        className="pt-8 md:pt-32 px-4  w-full  bg-white flex flex-col  items-center"
       >
         <div
-          className={`${playfair_display.className} font-[700] my-10 text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl `}
+          className={`${playfair_display.className} font-[700] my-10 text-center text-3xl  `}
         >
           COMPANY OVERVIEW{" "}
         </div>
         <div className="flex flex-col md:flex-row my-10 gap-10">
-          <div className="flex flex-col items-center">
-            <div className={`${lora.className} text-7xl md:text-9xl`}>20M+</div>
+          <div className="flex flex-col items-start justify-center">
+            <div className={`${lora.className} text-7xl `}>20M+</div>
             <div
               className={`${gothic_A1.className} font-[400]  text-lg  text-center max-w-3xl mx-auto`}
             >
@@ -98,10 +89,10 @@ export default function Home() {
               and Future Developments
             </div>
           </div>
-          <div className="border-black border-[0.1px]  w-44 md:h-44 md:w-0 opacity-20 text-center mx-auto"></div>
+          <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
 
           <div className="flex flex-col items-center">
-            <div className={`${lora.className} text-7xl md:text-9xl`}>1989</div>
+            <div className={`${lora.className} text-7xl `}>1989</div>
             <div
               className={`${gothic_A1.className} font-[400]  text-lg  text-center max-w-3xl mx-auto`}
             >
