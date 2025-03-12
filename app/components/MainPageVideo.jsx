@@ -7,8 +7,8 @@ const MainPageVideo = () => {
       <video
         autoPlay
         muted
-        loop
-        playsInline
+        loop={true}
+        playsInline={true}
         className="w-full h-full object-cover"
       >
         <source src="/overview.webm" type="video/webm" />
