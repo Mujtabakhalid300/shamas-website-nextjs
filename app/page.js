@@ -1,5 +1,6 @@
 import MainPageVideo from "./components/MainPageVideo";
 import ScrollButton from "./components/ScrollButton";
+import Image from "next/image";
 import {
   Gothic_A1,
   Libre_Baskerville,
@@ -35,13 +36,19 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
-        <img className=" w-2/3 md:max-w-xl z-10" src="/navbarLogo.png" />
+        <Image
+          className="w-2/3 md:max-w-xl z-10"
+          src="/navbarLogo.png"
+          alt="Navbar Logo"
+          width={500} // Set appropriate width
+          height={300} // Set appropriate height
+          priority // Ensures fast loading for important images
+        />{" "}
         <h3
           className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
         >
           Defining the Standards of Real Estate Development
         </h3>
-
         {/* Scroll Down Button */}
         <ScrollButton sectionName={"img-section"} />
       </section>
@@ -151,13 +158,20 @@ export default function Home() {
             that meet the needs of communities and investors alike.
           </div>
           <div
-            className={`${gothic_A1.className} font-[400] my-2 text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} font-[400] mt-2 text-lg  text-center max-w-3xl mx-auto`}
           >
             Their mission to innovate, build, sustain, empower, and excel drives
             every aspect of their work, making Shamas a trusted partner for
             clients seeking high-quality, impactful real estate solutions.
           </div>
         </div>
+        <a
+          href="/Shamas_Contracting_Co_Inc_Resume.pdf"
+          download
+          className={`bg-originalBlue hover:bg-navbarFocusBlue text-white ${gothic_A1.className} font-bold p-4 transition duration-200 tracking-tighter block text-center`}
+        >
+          DOWNLOAD THE SHAMAS BROCHURE
+        </a>
       </section>
     </main>
   );
