@@ -25,31 +25,31 @@ const Navbar = () => {
         <div className="hidden md:flex  h-full">
           <Link
             href="/"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
             OVERVIEW
           </Link>
           <Link
             href="/portfolio"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
             PORTFOLIO
           </Link>
           <Link
-            href="#"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+            href="/services"
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
-            AVAILABILITY
+            SERVICES
           </Link>
           <Link
             href="#"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
             MANAGEMENT
           </Link>
           <Link
             href="#"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
             CONTACT
           </Link>
@@ -104,31 +104,31 @@ const Navbar = () => {
         <ul className="flex flex-col items-start gap-2">
           <Link
             href="/"
-            className={` w-full focus:bg-[#193658] transition-all duration-300  ${roboto.className}`}
+            className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
             OVERVIEW
           </Link>
           <Link
             href="/portfolio"
-            className={` w-full focus:bg-[#193658] transition-all duration-300  ${roboto.className}`}
+            className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
             PORTFOLIO
           </Link>
           <Link
-            href="/availability"
-            className={` w-full focus:bg-[#193658] transition-all duration-300  ${roboto.className}`}
+            href="/SERVICES"
+            className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
-            AVAILABILITY
+            SERVICES
           </Link>
           <Link
             href="/management"
-            className={` w-full focus:bg-[#193658] transition-all duration-300  ${roboto.className}`}
+            className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
             MANAGEMENT
           </Link>
           <Link
             href="/contact"
-            className={` w-full focus:bg-[#193658] transition-all duration-300  ${roboto.className}`}
+            className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
             CONTACT
           </Link>

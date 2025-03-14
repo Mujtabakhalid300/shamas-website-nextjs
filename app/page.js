@@ -49,7 +49,7 @@ export default function Home() {
       {/* Next Section */}
       <section
         id="img-section"
-        className="pt-8 md:pt-32 px-4 relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
+        className="pt-10 md:pt-32 px-4 relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
       >
         <h2
           className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-2xl sm:text-3xl md:text-5xl  font-[400]`}
