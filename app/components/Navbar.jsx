@@ -115,7 +115,7 @@ const Navbar = () => {
             PORTFOLIO
           </Link>
           <Link
-            href="/SERVICES"
+            href="/services"
             className={` w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
             SERVICES
