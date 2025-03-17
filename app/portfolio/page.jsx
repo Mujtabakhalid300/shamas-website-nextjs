@@ -8,12 +8,10 @@ const page = () => {
       {projects.map((project) => (
         <Link key={project.id} href={`projects/${project.id}`}>
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <Image
+            <img
               src={project.images[0]}
               alt={project.title}
-              className="w-full h-48 object-cover hover:opacity- transition-all duration-300"
-              width={300}
-              height={300}
+              className="w-full h-48 object-cover hover:opacity-50 transition-all duration-300"
             />
             <div className="p-4">
               <h3 className="text-lg font-semibold">{project.titleShort}</h3>

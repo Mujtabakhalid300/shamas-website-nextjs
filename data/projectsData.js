@@ -41,9 +41,9 @@ export const projects = [
       },
     ],
     images: [
-      "/images/dix_avenue_1.webp",
-      "/images/dix_avenue_2.webp",
-      "/images/dix_avenue_3.webp",
+      "https://dxw0qsppdngapt9k.public.blob.vercel-storage.com/dix_avenue_1-DAZNl244NYB5A4tmmArOw7p74108nl.webp",
+      "https://dxw0qsppdngapt9k.public.blob.vercel-storage.com/dix_avenue_2-JsstonzqZRc19PauZ1yArVTiK1T5Qp.webp",
+      "https://dxw0qsppdngapt9k.public.blob.vercel-storage.com/dix_avenue_3-numiEvYKrVK3ElXICi1BV1GE8TDjJP.webp",
     ],
   },
   {
