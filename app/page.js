@@ -37,7 +37,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
         <Image
-          className="w-2/3 md:max-w-xl z-10"
+          className="w-2/3 md:max-w-xs z-10"
           src="/navbarLogo.png"
           alt="Navbar Logo"
           width={500} // Set appropriate width
@@ -56,17 +56,16 @@ export default function Home() {
       {/* Next Section */}
       <section
         id="img-section"
-        className="pt-10 md:pt-32 px-4 relative w-full h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
+        className="pt-16 md:pt-32 px-4 relative w-full filter brightness-100 h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
       >
         <h2
-          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-2xl sm:text-3xl md:text-5xl  font-[400]`}
+          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-3xl   font-[400]`}
         >
-          Shaping the
-          <br /> Skyline
+          Shaping the Skyline
         </h2>
 
         <div
-          className={`${gothic_A1.className} my-2 md:max-w-xl text-white text-lg font-[400]   text-center max-w-3xl `}
+          className={`${gothic_A1.className}  break-words my-2 md:max-w-xl text-white text-base font-[400]   text-center max-w-3xl `}
         >
           Shamasco has redefined the New York City skyline with an impressive
           portfolio of residential, office, hospitality, and mixed-use
@@ -86,11 +85,11 @@ export default function Home() {
         >
           COMPANY OVERVIEW{" "}
         </div>
-        <div className="flex flex-col md:flex-row my-10 gap-10">
+        <div className="flex flex-col md:flex-row my-8 gap-10">
           <div className="flex flex-col items-start justify-center">
             <div className={`${lora.className} text-7xl `}>20M+</div>
             <div
-              className={`${gothic_A1.className} font-[400]  text-lg  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
             >
               Gross Square Feet of Past <br />
               and Future Developments
@@ -101,70 +100,55 @@ export default function Home() {
           <div className="flex flex-col items-center">
             <div className={`${lora.className} text-7xl `}>1989</div>
             <div
-              className={`${gothic_A1.className} font-[400]  text-lg  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
             >
               Year Founded
             </div>
           </div>
         </div>
-        <div className="my-10">
+        <div className="my-16 px-6">
           <div
-            className={`${gothic_A1.className} my-2 font-[400] text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-center leading-relaxed max-w-3xl mx-auto`}
           >
             Shamas is a leading real estate development firm known for its
             technical expertise, innovation, and commitment to regulatory
-            compliance. Specializing in full-cycle development, the company
-            handles every aspect of a project, including land acquisition,
-            zoning, financing, design, construction, and asset management.
+            compliance.
           </div>
+          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>{" "}
+          {/* Decorative Divider */}
           <div
-            className={`${gothic_A1.className} font-[400] my-2 text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-center leading-loose max-w-3xl mx-auto`}
           >
             By focusing on sustainable practices, advanced engineering
-            solutions, and cutting-edge technology like Building Information
-            Modeling (BIM) and AI-driven project management tools, Shamas
-            ensures projects are delivered on time, within budget, and with
-            strong ROI. Their deep understanding of market trends and ability to
-            navigate complex regulations positions them as a trusted partner in
-            the real estate sector.
+            solutions, and cutting-edge technology, Shamas ensures projects are
+            delivered on time and within budget.
           </div>
+          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
           <div
-            className={`${gothic_A1.className} font-[400] my-2 text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-center leading-loose max-w-3xl mx-auto`}
           >
-            In response to evolving challenges such as rising interest rates,
-            inflation, and climate-related regulations, Shamas employs
-            strategies like fixed-rate financing, value engineering, and
-            sustainable design practices. These methods enhance energy
-            efficiency and resilience while optimizing construction timelines
-            and reducing waste.
+            In response to evolving challenges such as rising interest rates and
+            climate regulations, Shamas employs strategies like fixed-rate
+            financing, value engineering, and sustainable design.
           </div>
+          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
           <div
-            className={`${gothic_A1.className} font-[400] my-2 text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-center leading-loose max-w-3xl mx-auto`}
           >
             The firm’s focus on high-demand asset classes, including mixed-use
-            and energy-efficient residential projects, ensures that investors
-            and stakeholders achieve exceptional returns. Shamas is also
-            committed to building strong, long-term client relationships,
-            ensuring transparency, active communication, and personalized
-            service throughout every project phase.
+            and energy-efficient residential projects, ensures strong returns
+            for investors and stakeholders.
           </div>
+          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
           <div
-            className={`${gothic_A1.className} font-[400] my-2 text-lg  text-center max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-center font-semibold max-w-3xl mx-auto`}
           >
-            Looking ahead, Shamas continues to lead the way in real estate
-            development by balancing innovation, sustainability, and strategic
-            financial planning. With a focus on collaboration, precision, and
-            excellence, Shamas delivers transformative, future-ready projects
-            that meet the needs of communities and investors alike.
-          </div>
-          <div
-            className={`${gothic_A1.className} font-[400] mt-2 text-lg  text-center max-w-3xl mx-auto`}
-          >
-            Their mission to innovate, build, sustain, empower, and excel drives
-            every aspect of their work, making Shamas a trusted partner for
-            clients seeking high-quality, impactful real estate solutions.
+            Their mission to innovate, build, sustain, and empower drives every
+            aspect of their work, making Shamas a trusted partner for
+            high-quality real estate solutions.
           </div>
         </div>
+
         <a
           href="/Shamas_Contracting_Co_Inc_Resume.pdf"
           download
