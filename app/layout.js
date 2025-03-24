@@ -35,9 +35,10 @@ export default function RootLayout({ children }) {
 
             {/* Content (No Margin Needed) */}
             <div>{children}</div>
+
+            <Footer />
           </>
         )}
-        <Footer />
       </body>
     </html>
   );
