@@ -58,9 +58,12 @@ export default function PortfolioPage() {
               </button>
             ))}
           </div>
-          <div className="ml-auto hidden md:block text-xs font-bold uppercase border-b border-black cursor-pointer">
+          <button
+            onClick={() => setActiveFilter("All")}
+            className="ml-auto hidden md:block text-xs font-bold uppercase border-b border-black cursor-pointer hover:text-[#1a2533] transition-colors"
+          >
             View All
-          </div>
+          </button>
         </div>
       </div>
 
@@ -73,13 +76,14 @@ export default function PortfolioPage() {
                  Using property.slug if available, otherwise falling back to property.id 
               */
               <Link
-                href={`/portfolio/${property.slug || property.id}`}
+                href={`/portfolio/${property.title
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, "-")}`}
                 key={property.id}
                 className="group cursor-pointer flex flex-col"
               >
-                {/* Image Wrapper */}
+                {/* Image Wrapper (Clickable Only) */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
-                  {/* CHANGE: Replaced <img> with <Image /> using 'fill' */}
                   <Image
                     src={getThumbnailUrl(property.image)}
                     alt={property.title}
@@ -87,17 +91,10 @@ export default function PortfolioPage() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-
-                  {/* Overlay Badge */}
                   <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-gothic z-10">
                     {property.borough}
                   </div>
                 </div>
-
-                {/* Text Content */}
-                <h3 className="text-sm md:text-base font-medium text-gray-900 tracking-wide uppercase group-hover:text-blue-900 transition-colors font-libre">
-                  {property.title}
-                </h3>
               </Link>
             ))}
 
