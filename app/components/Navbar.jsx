@@ -48,7 +48,7 @@ const Navbar = () => {
             MANAGEMENT
           </Link>
           <Link
-            href="#"
+            href="/contact"
             className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
           >
             CONTACT

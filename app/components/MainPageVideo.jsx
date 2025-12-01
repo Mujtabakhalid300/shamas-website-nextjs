@@ -11,7 +11,10 @@ const MainPageVideo = () => {
         playsInline={true}
         className="w-full h-full object-cover"
       >
-        <source src="/overview.webm" type="video/webm" />
+        <source
+          src="/large-vecteezy_new-york-city-skyline-time-lapse-video-from-roof-top-with_20015744_large.webm"
+          type="video/webm"
+        />
       </video>
     </div>
   );

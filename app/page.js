@@ -56,21 +56,19 @@ export default function Home() {
       {/* Next Section */}
       <section
         id="img-section"
-        className="pt-16 md:pt-32 px-4 relative w-full filter brightness-100 h-screen bg-[url(/new-york-skyline.jpg)] items-center bg-cover bg-center bg-no-repeat flex flex-col"
+        className="pt-16 md:pt-32 px-4 relative w-full h-screen bg-[url(/skyline.jpg)] bg-black/60 bg-cover bg-center bg-no-repeat bg-blend-darken flex flex-col items-center"
       >
         <h2
           className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-3xl   font-[400]`}
         >
-          Shaping the Skyline
+          turning around distressed properties to wonderful homes
         </h2>
 
         <div
           className={`${gothic_A1.className}  break-words my-2 md:max-w-xl text-white text-base font-[400]   text-center max-w-3xl `}
         >
-          Shamasco has redefined the New York City skyline with an impressive
-          portfolio of residential, office, hospitality, and mixed-use
-          properties. These iconic properties have raised the benchmark and
-          continue to set the standards of real estate development.
+          Shamas has a proven track record for successful execution of a broad
+          range of construction, restoration & renovation projects.
         </div>
 
         <ScrollButton sectionName={"stats-section"} />
@@ -87,22 +85,21 @@ export default function Home() {
         </div>
         <div className="flex flex-col md:flex-row my-8 gap-10">
           <div className="flex flex-col items-start justify-center">
-            <div className={`${lora.className} text-7xl `}>20M+</div>
+            <div className={`${lora.className} text-7xl `}>18 Years</div>
             <div
               className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
             >
-              Gross Square Feet of Past <br />
-              and Future Developments
+              of track record <br />
             </div>
           </div>
           <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
 
           <div className="flex flex-col items-center">
-            <div className={`${lora.className} text-7xl `}>1989</div>
+            <div className={`${lora.className} text-7xl `}>200+</div>
             <div
               className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
             >
-              Year Founded
+              buildings
             </div>
           </div>
         </div>
@@ -110,9 +107,9 @@ export default function Home() {
           <div
             className={`${gothic_A1.className} text-black text-base text-center leading-relaxed max-w-3xl mx-auto`}
           >
-            Shamas is a leading real estate development firm known for its
-            technical expertise, innovation, and commitment to regulatory
-            compliance.
+            Our expertise in working with HUD, UHAB, HPD, and other affiliated
+            programs has made us a respective leader in the affordable housing
+            industry.
           </div>
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>{" "}
           {/* Decorative Divider */}
@@ -139,18 +136,10 @@ export default function Home() {
             and energy-efficient residential projects, ensures strong returns
             for investors and stakeholders.
           </div>
-          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
-          <div
-            className={`${gothic_A1.className} text-black text-base text-center font-semibold max-w-3xl mx-auto`}
-          >
-            Their mission to innovate, build, sustain, and empower drives every
-            aspect of their work, making Shamas a trusted partner for
-            high-quality real estate solutions.
-          </div>
         </div>
 
         <a
-          href="/Shamas_Contracting_Co_Inc_Resume.pdf"
+          href="/SCC Portfolio_R3.pdf"
           download
           className={`bg-originalBlue hover:bg-navbarFocusBlue text-white ${gothic_A1.className} font-bold p-4 transition duration-200 tracking-tighter block text-center`}
         >
