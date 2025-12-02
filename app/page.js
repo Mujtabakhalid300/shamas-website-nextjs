@@ -59,9 +59,9 @@ export default function Home() {
         className="pt-16 md:pt-32 px-4 relative w-full h-screen bg-[url(/skyline.jpg)] bg-black/60 bg-cover bg-center bg-no-repeat bg-blend-darken flex flex-col items-center"
       >
         <h2
-          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 text-white text-center text-3xl   font-[400]`}
+          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 mt-[12rem] text-white text-center text-3xl   font-[400]`}
         >
-          turning around distressed properties to wonderful homes
+          Turning around distressed properties to wonderful homes
         </h2>
 
         <div
