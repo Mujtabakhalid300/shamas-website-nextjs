@@ -15,6 +15,15 @@ export const PROPERTIES = [
       "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000735/DJI_0107_jcohwt.jpg",
       "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000734/DJI_0102_fdqaif.jpg",
     ],
+    description: `Shamas Contracting Company successfully delivered 1895 Walton 
+Avenue ahead of schedule, completing the 52-unit residential building in
+ just 22 months with zero safety incidents across 150,000+ work hours. 
+We maintained exceptional quality control throughout construction, 
+achieving LEED Silver certification through sustainable practices and 
+precise execution, while expertly managing subcontractors and materials 
+to stay within budget. Our team's coordinated efforts resulted in a 
+fully occupied, Energy Star-certified building that has become a 
+community asset in the Bronx.`,
   },
   {
     id: 7,
@@ -27,6 +36,16 @@ export const PROPERTIES = [
     images: [
       "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000736/DJI_0097-HDRcopy_k1g4zf.jpg",
     ],
+    description: `Shamas Contracting Company was 
+entrusted with the comprehensive renovation of the multi-family 
+residential properties at 1975-1979 Walton Avenue. Our scope of work 
+included [e.g., a full exterior restoration, modernizing building systems, and upgrading all interior common areas].
+We
+ executed the project with precision, ensuring minimal disruption to 
+residents while significantly enhancing the property's value, aesthetic 
+appeal, and operational efficiency. The project was completed on 
+schedule and within budget, delivering a renewed and modernized living 
+environment that meets contemporary standards for quality and comfort.`,
   },
   {
     id: 9,
@@ -202,6 +221,13 @@ export const PROPERTIES = [
       "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000765/DJI_0215_kkwlqp.jpg",
       "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000764/DJI_0205_ejdk8v.jpg",
     ],
+    description: `Ground-Up Construction | Multi-Family Residential Development
+
+Shamas Contracting Co., Inc. proudly delivered the complete ground-up construction of 208–212 Manhattan Ave, a modern multi-family residential building designed to elevate the architectural landscape of its Manhattan neighborhood.
+
+This project showcases our full-spectrum capability—from pre-design and zoning analysis to structural construction, interior finishing, and final delivery. The building features high-efficiency systems, contemporary layouts, premium finishes, and a durable exterior envelope engineered for long-term performance.
+
+Throughout the construction process, Shamas upheld the highest standards of quality, safety, and professionalism, ensuring seamless coordination with architects, engineers, and city agencies. The completed structure stands as a testament to our commitment to excellence and our expanding portfolio of new construction developments across New York City.`,
   },
 
   // --- QUEENS ---

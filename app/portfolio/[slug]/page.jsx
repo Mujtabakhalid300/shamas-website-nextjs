@@ -62,33 +62,21 @@ export default function PortfolioPage({ params }) {
 
   return (
     <main className="min-h-screen w-full flex items-center justify-center bg-white lg:px-12 lg:pb-12">
-      <div className="max-w-[1200px] w-full grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12 items-center">
+      {/* Changed items-center to items-start here */}
+      <div className="max-w-[1200px] w-full grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12 items-start">
         {/* --- TEXT DETAILS --- */}
-        <div className="flex flex-col items-center text-center mx-auto max-w-lg md:col-span-3 md:-mt-8">
-          <span className="font-serif text-lg text-black mb-2">
+        {/* Removed md:-mt-8 since items-start handles the alignment now */}
+        <div className="flex flex-col items-center text-center mx-auto max-w-lg md:col-span-3">
+          {/* <span className="font-serif text-lg text-black mb-2">
             {project.category || "Property"}
-          </span>
+          </span> */}
 
-          <div className="w-16 h-[1px] bg-black mb-8"></div>
+          {/* <div className="w-16 h-[1px] bg-black mb-8"></div> */}
 
-          <h1 className="font-serif text-5xl lg:text-6xl text-black mb-4 leading-tight">
+          {/* Added mt-0 or a small mt-2 here if you need to optically align the font cap-height with the image */}
+          <h1 className="font-serif text-5xl lg:text-6xl text-black mb-4 leading-tight mt-0">
             {project.title}
           </h1>
-
-          <h2 className="uppercase text-[11px] tracking-[0.2em] font-bold text-gray-700 mb-6">
-            {project.subTitle || project.title}
-          </h2>
-
-          <div className="flex flex-col gap-1 mb-8 text-center">
-            <span className="uppercase text-[10px] tracking-[0.15em] text-gray-600 font-medium">
-              Borough: {project.borough}
-            </span>
-            {project.contractValue && (
-              <span className="uppercase text-[10px] tracking-[0.15em] text-gray-600 font-medium">
-                Contract: {project.contractValue}
-              </span>
-            )}
-          </div>
 
           <p className="text-gray-600 text-sm leading-7 font-light">
             {project.description ||
