@@ -79,8 +79,8 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-[#00bcd4] mb-1">Phone</h3>
-                <p className="text-gray-300">516 620 5470</p>
-                <p className="text-gray-300">718 563 2100</p>
+                <p className="text-gray-300">+1 (516) 620-5470</p>
+                <p className="text-gray-300">+1 (718) 563-2100</p>
               </div>
             </div>
 
@@ -97,10 +97,8 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="bg-white p-8 md:p-10 shadow-2xl rounded-sm w-full">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">
-              Send Message
-            </h2>
+          <div className="bg-transparent border border-gray-400 p-8 md:p-10 rounded-sm w-full">
+            <h2 className="text-3xl font-bold text-white mb-8">Send Message</h2>
 
             <form
               ref={formRef}
