@@ -16,7 +16,7 @@ const Navbar = () => {
       className="sticky top-0 left-0 w-full bg-originalBlue text-white p-2 sm:p-0  z-50"
     >
       <div className="hidden md:flex bg-originalBlue text-white text-center border-b-[0.5px] border-opacity-50 border-white items-center justify-center py-3">
-        <img className="h-8" src="/navbarLogo.png" />
+        <img className="h-8" src="/SHAMAS_CONTRACTING.png" />
       </div>
       <div className="flex justify-between md:justify-around items-center ">
         <img className="md:hidden h-8" src="/navbarLogo.png" />
