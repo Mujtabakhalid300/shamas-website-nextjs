@@ -12,9 +12,9 @@ const services = [
       "Professional planning, supervision, and coordination across all project phases.",
   },
   {
-    title: "CPM Scheduling",
+    title: "Project Planning & Optimization",
     description:
-      "Accurate Critical Path scheduling to optimize timelines and resource planning.",
+      "Strategic planning and workflow optimization to streamline timelines, resources, and project execution.",
   },
   {
     title: "Real Estate Development",

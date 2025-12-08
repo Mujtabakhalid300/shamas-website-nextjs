@@ -22,34 +22,34 @@ const Navbar = () => {
         <img className="md:hidden h-8" src="/navbarLogo.png" />
 
         {/* Desktop Menu (Hidden on small screens) */}
-        <div className="hidden md:flex  h-full">
+        <div className="hidden md:flex h-full">
           <Link
             href="/"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             OVERVIEW
           </Link>
           <Link
             href="/portfolio"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             PORTFOLIO
           </Link>
           <Link
             href="/services"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             SERVICES
           </Link>
           <Link
             href="#"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             MANAGEMENT
           </Link>
           <Link
             href="/contact"
-            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal`}
+            className={`hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             CONTACT
           </Link>

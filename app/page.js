@@ -84,22 +84,31 @@ export default function Home() {
           COMPANY OVERVIEW{" "}
         </div>
         <div className="flex flex-col md:flex-row my-8 gap-10">
-          <div className="flex flex-col items-start justify-center">
+          <div className="flex flex-col items-center md:items-start justify-center">
             <div className={`${lora.className} text-7xl `}>18 Years</div>
             <div
-              className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
             >
               of track record <br />
             </div>
           </div>
           <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center md:items-start justify-center">
             <div className={`${lora.className} text-7xl `}>200+</div>
             <div
-              className={`${gothic_A1.className} font-[400]  text-base  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
             >
               buildings
+            </div>
+          </div>
+          <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
+          <div className="flex flex-col items-center md:items-start justify-center">
+            <div className={`${lora.className} text-7xl `}>2500+</div>
+            <div
+              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
+            >
+              Units
             </div>
           </div>
         </div>
@@ -118,7 +127,7 @@ export default function Home() {
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>{" "}
           {/* Decorative Divider */}
           <div
-            className={`${gothic_A1.className} text-black text-base text-justify leading-loose max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Our deep understanding of affordable housing and public-sector
             construction sets us apart. We are proud to be recognized as a
@@ -131,7 +140,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
           <div
-            className={`${gothic_A1.className} text-black text-base text-justify leading-loose max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             At the core of our work is a commitment to sustainability,
             innovation, and precision. By integrating advanced engineering
@@ -146,7 +155,7 @@ export default function Home() {
           </div>
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
           <div
-            className={`${gothic_A1.className} text-black font-bold text-base text-justify leading-loose max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-black font-bold text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Driven by integrity, craftsmanship, and family leadership, we
             continue to build spaces that serve communities, support long-term
