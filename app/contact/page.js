@@ -67,8 +67,8 @@ export default function ContactPage() {
                 <h3 className="text-xl font-bold text-[#00bcd4] mb-1">
                   Address
                 </h3>
-                <p className="text-gray-300">10 W Main St Elmsford</p>
-                <p className="text-gray-300">NY 10523, US</p>
+                <p className="text-gray-300">10 West Main St. Elmsford </p>
+                <p className="text-gray-300">New York 10523, Suite 200</p>
               </div>
             </div>
 
