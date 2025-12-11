@@ -7,7 +7,6 @@ import {
   Lora,
   Playfair_Display,
 } from "next/font/google";
-import LogoScene from "./components/logo3d";
 
 const gothic_A1 = Gothic_A1({
   subsets: ["latin"],
