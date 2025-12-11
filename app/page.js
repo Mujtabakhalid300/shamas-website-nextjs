@@ -44,6 +44,7 @@ export default function Home() {
           height={300} // Set appropriate height
           priority // Ensures fast loading for important images
         />{" "}
+        {/* <LogoScene /> */}
         <h3
           className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
         >

@@ -1,39 +1,25 @@
 "use client";
 import { useState, useRef, useTransition } from "react";
 import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+import { sendEmail } from "./actions";
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
   const [statusMessage, setStatusMessage] = useState({ type: "", text: "" });
   const formRef = useRef(null);
 
-  // Mock Server Action for the preview
-  const mockSendEmail = async (formData) => {
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    const email = formData.get("email");
-    const message = formData.get("message");
-
-    if (!email || !message) {
-      return { success: false, message: "Please fill in all required fields." };
-    }
-
-    return { success: true, message: "Email sent successfully!" };
-  };
-
   const handleFormSubmit = (event) => {
-    event.preventDefault(); // Prevent default browser submission for this preview
+    event.preventDefault();
     const formData = new FormData(event.target);
 
     setStatusMessage({ type: "", text: "" });
 
     startTransition(async () => {
-      const result = await mockSendEmail(formData);
+      const result = await sendEmail(formData);
 
       if (result.success) {
         setStatusMessage({ type: "success", text: result.message });
-        if (formRef.current) formRef.current.reset(); // Clear form on success
+        if (formRef.current) formRef.current.reset();
       } else {
         setStatusMessage({ type: "error", text: result.message });
       }
@@ -105,6 +91,16 @@ export default function ContactPage() {
               onSubmit={handleFormSubmit}
               className="space-y-6"
             >
+              {/* --- HONEYPOT FIELD (INVISIBLE) --- */}
+              <input
+                type="text"
+                name="website_url"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+              {/* ---------------------------------- */}
+
               {/* Full Name */}
               <div className="relative">
                 <input
@@ -112,7 +108,7 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   required
-                  className="peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent bg-transparent"
+                  className="text-white peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent bg-transparent"
                   placeholder="Full Name"
                   disabled={isPending}
                 />
@@ -131,7 +127,7 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   required
-                  className="peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent bg-transparent"
+                  className=" text-white peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent bg-transparent"
                   placeholder="Email"
                   disabled={isPending}
                 />
@@ -150,7 +146,7 @@ export default function ContactPage() {
                   name="message"
                   rows="3"
                   required
-                  className="peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent resize-none bg-transparent"
+                  className="text-white peer w-full border-b border-gray-300 py-2 focus:outline-none focus:border-[#00bcd4] transition-colors placeholder-transparent resize-none bg-transparent"
                   placeholder="Type your Message.."
                   disabled={isPending}
                 ></textarea>
