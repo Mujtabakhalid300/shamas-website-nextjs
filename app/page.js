@@ -7,6 +7,7 @@ import {
   Lora,
   Playfair_Display,
 } from "next/font/google";
+import LogoScene from "./components/logo3d";
 
 const gothic_A1 = Gothic_A1({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function Home() {
           height={300} // Set appropriate height
           priority // Ensures fast loading for important images
         />{" "}
+        {/* <LogoScene /> */}
         <h3
           className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
         >

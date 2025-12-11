@@ -285,3 +285,88 @@ Throughout the construction process, Shamas upheld the highest standards of qual
     ],
   },
 ];
+
+export const portfolioData = {
+  "whco-portfolio": {
+    title: "07 — WHCO Portfolio",
+    id: "proj_whco_07",
+    category: "", // Add category later (e.g., "Residential")
+    status: "", // Add status later (e.g., "Completed")
+    borough: "", // Likely "Manhattan" based on addresses, but left empty
+    description: "",
+    thumbnail: "", // Main project image path
+    buildings: [
+      {
+        buildingName: "102 W 114th Street",
+        buildingId: "whco_01",
+        address: "102 W 114th Street, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [
+          "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000743/DSC02366_ec897n.jpg",
+        ],
+      },
+      {
+        buildingName: "104 W 114th Street",
+        buildingId: "whco_02",
+        address: "104 W 114th Street, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [
+          "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000743/DJI_0180_vflunj.jpg",
+        ],
+      },
+      {
+        buildingName: "83 W 115th Street",
+        buildingId: "whco_03",
+        address: "83 W 115th Street, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [],
+      },
+      {
+        buildingName: "157 W 119th Street",
+        buildingId: "whco_04",
+        address: "157 W 119th Street, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [],
+      },
+      {
+        buildingName: "202 St. Nicholas Avenue",
+        buildingId: "whco_05",
+        address: "202 St. Nicholas Avenue, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [
+          "https://res.cloudinary.com/dy4peuqxj/image/upload/v1764000764/DJI_0200_uzppdd.jpg",
+        ],
+      },
+      {
+        buildingName: "208 St. Nicholas Avenue",
+        buildingId: "whco_06",
+        address: "208 St. Nicholas Avenue, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [],
+      },
+      {
+        buildingName: "218 St. Nicholas Avenue",
+        buildingId: "whco_07",
+        address: "218 St. Nicholas Avenue, New York, NY",
+        sqFootage: "",
+        floors: "",
+        description: "",
+        images: [],
+      },
+    ],
+  },
+
+  // ... (Your other projects would go here)
+};

@@ -70,45 +70,73 @@ export default function PortfolioPage() {
       {/* --- MAIN CONTENT AREA --- */}
       <main className="w-full relative">
         <div className="w-full bg-white">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-8 p-6 md:p-10">
-            {filteredProperties.map((property) => (
-              /* CHANGE: Wrapped in <Link>. 
-                 Using property.slug if available, otherwise falling back to property.id 
-              */
-              <Link
-                href={`/portfolio/${property.title
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]+/g, "-")}`}
-                key={property.id}
-                className="group cursor-pointer flex flex-col"
-              >
-                {/* Image Wrapper */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
-                  <Image
-                    src={getThumbnailUrl(property.image)}
-                    alt={property.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-gothic z-10">
-                    Completed
+          <div className="flex flex-col md:flex-row min-h-screen w-full">
+            {/* LEFT SIDE: Content */}
+            {/* w-full on mobile, w-1/2 on tablet/desktop */}
+            <div className="w-full md:w-1/2 bg-white">
+              {/* GRID SETTINGS:
+      - grid-cols-1: Default (Mobile/Tablet portrait) - strictly 1 column as requested.
+      - lg:grid-cols-2: Large screens (Laptop) - 2 columns.
+      - xl:grid-cols-3: Extra large screens - 3 columns.
+    */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 p-6 md:p-10">
+                {filteredProperties.map((property) => (
+                  <Link
+                    href={`/portfolio/${property.title
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, "-")}`}
+                    key={property.id}
+                    className="group cursor-pointer flex flex-col"
+                  >
+                    {/* Image Wrapper */}
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
+                      <Image
+                        src={getThumbnailUrl(property.image)}
+                        alt={property.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-gothic z-10">
+                        Completed
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <div className="text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center font-gothic">
+                      {property.title}
+                    </div>
+                  </Link>
+                ))}
+
+                {/* Empty State */}
+                {filteredProperties.length === 0 && (
+                  <div className="col-span-full py-20 text-center text-gray-400 font-gothic">
+                    No properties found in **{activeFilter}**
                   </div>
-                </div>
-
-                {/* Title (Permanently visible below image) */}
-                <div className="text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center font-gothic">
-                  {property.title}
-                </div>
-              </Link>
-            ))}
-
-            {/* Empty State */}
-            {filteredProperties.length === 0 && (
-              <div className="col-span-full py-20 text-center text-gray-400 font-gothic">
-                No properties found in **{activeFilter}**
+                )}
               </div>
-            )}
+            </div>
+
+            {/* RIGHT SIDE: Image */}
+            {/* - hidden: Hides completely on mobile.
+    - md:block: Shows on tablet and up.
+    - p-10: Adds the padding around the image.
+  */}
+            <div className="hidden md:block w-1/2 h-screen sticky top-0 p-10 bg-white">
+              {/* Inner wrapper to handle the 'fill' image correctly within the padding */}
+              <div className="relative w-full h-full overflow-hidden rounded-lg bg-gray-50">
+                <Image
+                  src="/map.jpeg"
+                  alt="Featured Property"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Optional Overlay */}
+                <div className="absolute inset-0 bg-black/5" />
+              </div>
+            </div>
           </div>
         </div>
       </main>
