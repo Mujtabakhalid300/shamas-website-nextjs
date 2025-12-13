@@ -36,17 +36,29 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
+        {/* Small Video before Logo */}
+        <video
+          src="/intro.mp4"
+          width={192}
+          height={192}
+          autoPlay
+          loop
+          muted
+          className="z-10 w-[192px] h-[192px] rounded-md mb-4"
+        />
+
+        {/* Logo */}
         <Image
           className="w-2/3 md:max-w-xs z-10"
           src="/navbarLogo.png"
           alt="Navbar Logo"
-          width={500} // Set appropriate width
-          height={300} // Set appropriate height
-          priority // Ensures fast loading for important images
-        />{" "}
-        {/* <LogoScene /> */}
+          width={500}
+          height={300}
+          priority
+        />
+
         <h3
-          className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
+          className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center`}
         >
           Defining the Standards of Real Estate Development
         </h3>
@@ -60,13 +72,13 @@ export default function Home() {
         className="pt-16 md:pt-32 px-4 relative w-full h-screen bg-[url(/skyline.jpg)] bg-black/60 bg-cover bg-center bg-no-repeat bg-blend-darken flex flex-col items-center"
       >
         <h2
-          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 mt-[12rem] text-white text-center text-3xl   font-[400]`}
+          className={`leading-normal md:leading-tight ${libre_basker.className} tracking-wider my-2 mt-[12rem] text-white text-center text-3xl font-[400]`}
         >
           Turning around distressed properties to wonderful homes
         </h2>
 
         <div
-          className={`${gothic_A1.className}  break-words my-2 md:max-w-xl text-white text-base font-[400]   text-center max-w-3xl `}
+          className={`${gothic_A1.className} break-words my-2 md:max-w-xl text-white text-base font-[400] text-center max-w-3xl`}
         >
           Shamas has a proven track record for successful execution of a broad
           range of construction, restoration & renovation projects.
@@ -75,47 +87,53 @@ export default function Home() {
         <ScrollButton sectionName={"stats-section"} />
       </section>
 
+      {/* Stats Section */}
       <section
         id="stats-section"
-        className="pt-8 md:pt-32 px-4  w-full  bg-white flex flex-col  items-center"
+        className="pt-8 md:pt-32 px-4 w-full bg-white flex flex-col items-center"
       >
         <div
-          className={`${playfair_display.className} font-[700] my-10 text-center text-3xl  `}
+          className={`${playfair_display.className} font-[700] my-10 text-center text-3xl`}
         >
-          COMPANY OVERVIEW{" "}
+          COMPANY OVERVIEW
         </div>
+
         <div className="flex flex-col md:flex-row my-8 gap-10">
           <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl `}>18 Years</div>
+            <div className={`${lora.className} text-7xl`}>18 Years</div>
             <div
-              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
               of track record <br />
             </div>
           </div>
-          <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
+
+          <div className="border-black border-[0.1px] w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
 
           <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl `}>200+</div>
+            <div className={`${lora.className} text-7xl`}>200+</div>
             <div
-              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
               buildings
             </div>
           </div>
-          <div className="border-black border-[0.1px]  w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
+
+          <div className="border-black border-[0.1px] w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
+
           <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl `}>2500+</div>
+            <div className={`${lora.className} text-7xl`}>2500+</div>
             <div
-              className={`${gothic_A1.className} font-[100]  text-base  text-center max-w-3xl mx-auto`}
+              className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
               Units
             </div>
           </div>
         </div>
+
         <div className="my-16 px-6">
           <div
-            className={`${gothic_A1.className} text-justify text-black text-base  leading-relaxed max-w-3xl mx-auto`}
+            className={`${gothic_A1.className} text-justify text-black text-base leading-relaxed max-w-3xl mx-auto`}
           >
             For nearly two decades, Shamas and Hammad, two brothers with a
             shared vision and a hands-on work ethic, have been leading the firm
@@ -125,8 +143,9 @@ export default function Home() {
             delivering high-quality results across some of the city’s most
             challenging and tightly regulated environments..
           </div>
-          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>{" "}
-          {/* Decorative Divider */}
+
+          <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
+
           <div
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
@@ -139,7 +158,9 @@ export default function Home() {
             efficient, safe, and community-focused—especially in occupied
             buildings where sensitivity and coordination are key.
           </div>
+
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
+
           <div
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
@@ -154,7 +175,9 @@ export default function Home() {
             performance, reliability, and lasting value for property owners,
             partners, and investors.
           </div>
+
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
+
           <div
             className={`${gothic_A1.className} text-black font-bold text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
