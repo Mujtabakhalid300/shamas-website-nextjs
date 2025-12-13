@@ -1,10 +1,26 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link"; // IMPORTED LINK
-import Image from "next/image"; // IMPORTED NEXT/IMAGE
+import Link from "next/link";
+import Image from "next/image";
 import { PROPERTIES } from "@/data/projectsData";
 
-// Function to generate the optimized thumbnail URL using Cloudinary transformations
+// --- 1. CONFIGURATION ---
+const MAP_WIDTH = 598;
+const MAP_HEIGHT = 767;
+
+const MAP_REGIONS = [
+  {
+    id: "box-1",
+    label: "Warehouse District",
+    subLabel: "Available Now",
+    path: "M 207 406 H 207 V 367 H 255 H 255 V 407",
+    x: 231,
+    y: 367,
+  },
+  // Add more regions here...
+];
+
+// --- 2. HELPER FUNCTIONS ---
 const getThumbnailUrl = (originalUrl) => {
   if (!originalUrl.includes("cloudinary.com")) {
     return originalUrl.includes("?")
@@ -16,11 +32,12 @@ const getThumbnailUrl = (originalUrl) => {
   return parts[0] + "/upload/" + transformation + parts[1];
 };
 
-// --- FILTERS ARRAY ---
 const FILTERS = ["All", "Bronx", "Manhattan", "Queens", "S.I", "Brooklyn"];
 
+// --- 3. MAIN COMPONENT ---
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [activeRegion, setActiveRegion] = useState(null);
 
   const filteredProperties = PROPERTIES.filter((prop) => {
     if (activeFilter === "All") return true;
@@ -32,9 +49,6 @@ export default function PortfolioPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;400;700&family=Libre+Baskerville&family=Lora&family=Playfair+Display:wght@400;700&display=swap');
         .font-gothic { font-family: 'Gothic A1', sans-serif; }
-        .font-libre { font-family: 'Libre Baskerville', serif; }
-        .font-lora { font-family: 'Lora', serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
       `}</style>
 
       {/* --- FILTER BAR --- */}
@@ -71,14 +85,8 @@ export default function PortfolioPage() {
       <main className="w-full relative">
         <div className="w-full bg-white">
           <div className="flex flex-col md:flex-row min-h-screen w-full">
-            {/* LEFT SIDE: Content */}
-            {/* w-full on mobile, w-1/2 on tablet/desktop */}
+            {/* LEFT SIDE: Property List */}
             <div className="w-full md:w-1/2 bg-white">
-              {/* GRID SETTINGS:
-      - grid-cols-1: Default (Mobile/Tablet portrait) - strictly 1 column as requested.
-      - lg:grid-cols-2: Large screens (Laptop) - 2 columns.
-      - xl:grid-cols-3: Extra large screens - 3 columns.
-    */}
               <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 p-6 md:p-10">
                 {filteredProperties.map((property) => (
                   <Link
@@ -88,7 +96,6 @@ export default function PortfolioPage() {
                     key={property.id}
                     className="group cursor-pointer flex flex-col"
                   >
-                    {/* Image Wrapper */}
                     <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
                       <Image
                         src={getThumbnailUrl(property.image)}
@@ -101,15 +108,12 @@ export default function PortfolioPage() {
                         Completed
                       </div>
                     </div>
-
-                    {/* Title */}
                     <div className="text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center font-gothic">
                       {property.title}
                     </div>
                   </Link>
                 ))}
 
-                {/* Empty State */}
                 {filteredProperties.length === 0 && (
                   <div className="col-span-full py-20 text-center text-gray-400 font-gothic">
                     No properties found in **{activeFilter}**
@@ -118,23 +122,62 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* RIGHT SIDE: Image */}
-            {/* - hidden: Hides completely on mobile.
-    - md:block: Shows on tablet and up.
-    - p-10: Adds the padding around the image.
-  */}
-            <div className="hidden md:block w-1/2 h-screen sticky top-0 p-10 bg-white">
-              {/* Inner wrapper to handle the 'fill' image correctly within the padding */}
-              <div className="relative w-full h-full overflow-hidden rounded-lg bg-gray-50">
+            {/* --- RIGHT SIDE: INTERACTIVE MAP --- */}
+            <div className="hidden md:flex w-1/2 h-screen sticky top-0 items-center justify-center p-10 bg-white">
+              <div className="relative w-full max-h-full aspect-[598/767] overflow-hidden rounded-lg bg-gray-50 shadow-lg group">
+                {/* 1. Base Image */}
                 <Image
                   src="/map.jpeg"
-                  alt="Featured Property"
+                  alt="Interactive Map"
                   fill
                   className="object-cover"
                   priority
                 />
-                {/* Optional Overlay */}
-                <div className="absolute inset-0 bg-black/5" />
+                <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+
+                {/* 2. SVG Overlay */}
+                <svg
+                  viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+                  className="absolute inset-0 w-full h-full"
+                  preserveAspectRatio="none"
+                >
+                  {MAP_REGIONS.map((region) => (
+                    <path
+                      key={region.id}
+                      d={region.path}
+                      vectorEffect="non-scaling-stroke"
+                      // CHANGE: Removed the conditional styling logic.
+                      // It is now ALWAYS transparent, but the cursor indicates it's clickable.
+                      className="cursor-pointer fill-transparent stroke-transparent"
+                      onMouseEnter={() => setActiveRegion(region)}
+                      onMouseLeave={() => setActiveRegion(null)}
+                    />
+                  ))}
+                </svg>
+
+                {/* 3. DYNAMIC TOOLTIP */}
+                {activeRegion && (
+                  <div
+                    className="absolute z-50 pointer-events-none flex flex-col items-center justify-center"
+                    style={{
+                      left: `${(activeRegion.x / MAP_WIDTH) * 100}%`,
+                      top: `${(activeRegion.y / MAP_HEIGHT) * 100}%`,
+                      transform: "translate(-50%, -100%) translateY(-12px)",
+                    }}
+                  >
+                    <div className="bg-[#1a2533] text-white px-3 py-2 rounded shadow-xl flex flex-col items-center min-w-[120px] animate-in fade-in zoom-in duration-200">
+                      <span className="text-[10px] font-bold uppercase tracking-wider font-gothic">
+                        {activeRegion.label}
+                      </span>
+                      {activeRegion.subLabel && (
+                        <span className="text-[9px] text-gray-300 mt-0.5">
+                          {activeRegion.subLabel}
+                        </span>
+                      )}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1a2533] rotate-45"></div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

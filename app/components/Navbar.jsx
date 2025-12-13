@@ -57,7 +57,7 @@ const Navbar = () => {
             href="/form"
             className={`text-[bisque] hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue w-full h-full p-3 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
-            FORM
+            WORK WITH US
           </Link>
         </div>
 
@@ -142,7 +142,7 @@ const Navbar = () => {
             href="/form"
             className={` text-[bisque] w-full focus:bg-[#193658] transition-all duration-300  tracking-tighter ${roboto.className}`}
           >
-            FORM
+            WORK WITH US
           </Link>
         </ul>
       </div>

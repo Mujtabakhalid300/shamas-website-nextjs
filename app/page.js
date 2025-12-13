@@ -36,17 +36,28 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
+        {/* Video placed above the image */}
+        <video
+          className="w-32 md:max-w-xs z-10 mb-4" // Added mb-4 for spacing between video and image
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/rotatingLogo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <Image
           className="w-2/3 md:max-w-xs z-10"
           src="/navbarLogo.png"
           alt="Navbar Logo"
-          width={500} // Set appropriate width
-          height={300} // Set appropriate height
-          priority // Ensures fast loading for important images
+          width={500}
+          height={300}
+          priority
         />{" "}
         {/* <LogoScene /> */}
         <h3
-          className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl  text-center`}
+          className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center`}
         >
           Defining the Standards of Real Estate Development
         </h3>
