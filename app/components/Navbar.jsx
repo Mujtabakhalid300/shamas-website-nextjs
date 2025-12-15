@@ -43,12 +43,12 @@ const Navbar = () => {
           >
             SERVICES
           </Link>
-          <Link
+          {/* <Link
             href="/management"
             className={`text-[bisque] hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue px-3 py-2 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
           >
             MANAGEMENT
-          </Link>
+          </Link> */}
           <Link
             href="/contact"
             className={`text-[bisque] hover:bg-navbarFocusBlue focus:bg-navbarFocusBlue px-3 py-2 tracking-tighter ${roboto.className} font-normal transition-transform duration-200 hover:scale-105`}
@@ -128,12 +128,12 @@ const Navbar = () => {
           >
             SERVICES
           </Link>
-          <Link
+          {/* <Link
             href="/management"
             className={`text-[bisque] px-3 py-2 ${roboto.className}`}
           >
             MANAGEMENT
-          </Link>
+          </Link> */}
           <Link
             href="/contact"
             className={`text-[bisque] px-3 py-2 ${roboto.className}`}
