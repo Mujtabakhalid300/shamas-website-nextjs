@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useTransition } from "react";
-import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+// Added Navigation to imports
+import { Mail, Phone, MapPin, Loader2, Navigation } from "lucide-react";
 import { sendEmail } from "./actions";
 
 export default function ContactPage() {
@@ -44,7 +45,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Left Column: Contact Info */}
           <div className="space-y-8 pl-4 lg:pl-12">
-            {/* Address */}
+            {/* Address Section */}
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black">
                 <MapPin size={24} />
@@ -55,6 +56,23 @@ export default function ContactPage() {
                 </h3>
                 <p className="text-gray-300">10 West Main St. Elmsford </p>
                 <p className="text-gray-300">New York 10523, Suite 200</p>
+
+                {/* --- NEW DIRECTIONS LINK --- */}
+                <a
+                  href="https://maps.app.goo.gl/vdeZkeAfuf5q1f3d6" // Dummy Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-4 text-[#00bcd4] hover:text-[#00acc1] transition-colors group"
+                >
+                  <Navigation
+                    size={18}
+                    className="group-hover:translate-x-1 transition-transform duration-200"
+                  />
+                  <span className="font-semibold underline decoration-transparent group-hover:decoration-[#00acc1] transition-all">
+                    Get Directions
+                  </span>
+                </a>
+                {/* --------------------------- */}
               </div>
             </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PROPERTIES } from "@/data/projectsData";
@@ -7,6 +7,16 @@ import { PROPERTIES } from "@/data/projectsData";
 // --- 1. CONFIGURATION ---
 const MAP_WIDTH = 598;
 const MAP_HEIGHT = 767;
+
+// ✅ NEW: Centralized Map Image Configuration
+// Simply add new filters here as "Key": "Image Path"
+const MAP_IMAGES = {
+  All: "/map.jpeg", // Default map
+  Manhattan: "/manhattan_map.jpg",
+  Bronx: "/bronx_map.jpg", // Example: easy to add in future
+  Queens: "/queens_map.jpg",
+  // "Brooklyn": "/brooklyn_map.jpg",
+};
 
 const MAP_REGIONS = [
   {
@@ -17,7 +27,6 @@ const MAP_REGIONS = [
     x: 231,
     y: 367,
   },
-  // Add more regions here...
 ];
 
 // --- 2. HELPER FUNCTIONS ---
@@ -38,6 +47,16 @@ const FILTERS = ["All", "Bronx", "Manhattan", "Queens", "S.I", "Brooklyn"];
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeRegion, setActiveRegion] = useState(null);
+
+  // ✅ SCALABLE LOGIC:
+  // Look up the image for the current filter.
+  // If no specific image exists for that filter, fallback to "All" (the default map).
+  const mapImageSrc = MAP_IMAGES[activeFilter] || MAP_IMAGES["All"];
+
+  // Reset active region when filter changes
+  useEffect(() => {
+    setActiveRegion(null);
+  }, [activeFilter]);
 
   const filteredProperties = PROPERTIES.filter((prop) => {
     if (activeFilter === "All") return true;
@@ -125,12 +144,13 @@ export default function PortfolioPage() {
             {/* --- RIGHT SIDE: INTERACTIVE MAP --- */}
             <div className="hidden md:flex w-1/2 h-screen sticky top-0 items-center justify-center p-10 bg-white">
               <div className="relative w-full max-h-full aspect-[598/767] overflow-hidden rounded-lg bg-gray-50 shadow-lg group">
-                {/* 1. Base Image */}
+                {/* 1. Base Image - Dynamic Src from MAP_IMAGES */}
                 <Image
-                  src="/map.jpeg"
-                  alt="Interactive Map"
+                  key={mapImageSrc}
+                  src={mapImageSrc}
+                  alt={`${activeFilter} Map`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-opacity duration-300"
                   priority
                 />
                 <div className="absolute inset-0 bg-black/5 pointer-events-none" />
@@ -146,8 +166,6 @@ export default function PortfolioPage() {
                       key={region.id}
                       d={region.path}
                       vectorEffect="non-scaling-stroke"
-                      // CHANGE: Removed the conditional styling logic.
-                      // It is now ALWAYS transparent, but the cursor indicates it's clickable.
                       className="cursor-pointer fill-transparent stroke-transparent"
                       onMouseEnter={() => setActiveRegion(region)}
                       onMouseLeave={() => setActiveRegion(null)}

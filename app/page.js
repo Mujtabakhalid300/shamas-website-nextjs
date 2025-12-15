@@ -36,36 +36,45 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
-        {/* Small Video before Logo */}
-        <video
-          src="/intro.mp4"
-          width={192}
-          height={192}
-          autoPlay
-          loop
-          muted
-          className="z-10 w-[192px] h-[192px] rounded-md mb-4"
-        />
+        {/* --- LOGO CONTAINER --- */}
+        {/* 'relative' allows us to anchor the GIF to this box */}
+        {/* 'flex' ensures the SHAMAS logo is the main centered element */}
+        <div className="relative flex items-center justify-center mb-2 z-10">
+          {/* --- GIF (ABSOLUTE POSITIONED) --- */}
+          {/* right-full: Pushes it to the left edge of the container */}
+          {/* top-1/2 -translate-y-1/2: Centers it vertically */}
+          {/* translate-x-8: Pushes it RIGHT by 2rem to create the overlap */}
+          <div className="absolute right-full top-1/2 -translate-y-1/2 translate-x-8 md:translate-x-12">
+            <img
+              src="/Logo_Animation.gif"
+              alt="Logo Animation"
+              width={90}
+              height={158}
+              className="w-[160px] h-[90px] md:w-[90px] md:h-[158px] rounded-md object-cover max-w-none"
+            />
+          </div>
 
-        {/* Logo */}
-        <Image
-          className="w-2/3 md:max-w-xs z-10"
-          src="/navbarLogo.png"
-          alt="Navbar Logo"
-          width={500}
-          height={300}
-          priority
-        />
+          {/* --- STATIC LOGO (CENTERED) --- */}
+          <Image
+            className="w-3/4 md:max-w-md object-contain"
+            src="/navbarLogo.png"
+            alt="Navbar Logo"
+            width={600}
+            height={360}
+            priority
+          />
+        </div>
+        {/* ---------------------- */}
 
         <h3
-          className={`my-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center`}
+          className={`mt-0 mb-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center mt-4`}
         >
           Defining the Standards of Real Estate Development
         </h3>
+
         {/* Scroll Down Button */}
         <ScrollButton sectionName={"img-section"} />
       </section>
-
       {/* Next Section */}
       <section
         id="img-section"
