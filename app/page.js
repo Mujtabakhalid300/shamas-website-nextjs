@@ -216,7 +216,11 @@ export default function Home() {
           >
             For nearly two decades, Shamas and Hammad, two brothers with a
             shared vision and a hands-on work ethic, have been leading the firm
-            as a trusted general contractor throughout New York City...
+            as a trusted general contractor throughout New York City. With 18+
+            years of experience, we specialize in occupied rehabilitations,
+            full-gut renovations, masonry, roofing, and ground-up construction,
+            delivering high-quality results across some of the city’s most
+            challenging and tightly regulated environments.
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -225,7 +229,13 @@ export default function Home() {
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Our deep understanding of affordable housing and public-sector
-            construction sets us apart...
+            construction sets us apart. We are proud to be recognized as a
+            respected leader within the industry, with extensive experience
+            working with HUD, UHAB, HPD, and other affiliated programs. Our team
+            is skilled at navigating complex compliance requirements,
+            coordinating with stakeholders, and ensuring that projects remain
+            efficient, safe, and community-focused—especially in occupied
+            buildings where sensitivity and coordination are key.
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -234,7 +244,15 @@ export default function Home() {
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             At the core of our work is a commitment to sustainability,
-            innovation, and precision...
+            innovation, and precision. By integrating advanced engineering
+            solutions, value engineering, and cutting-edge construction
+            technology, we consistently deliver projects on time and within
+            budget while proactively responding to NYC’s evolving landscape of
+            climate mandates and energy-efficiency goals. Our portfolio spans
+            mixed-use developments, affordable housing, and energy-efficient
+            residential projects, resulting in a strong track record of
+            performance, reliability, and lasting value for property owners,
+            partners, and investors
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -243,7 +261,9 @@ export default function Home() {
             className={`${gothic_A1.className} text-black font-bold text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Driven by integrity, craftsmanship, and family leadership, we
-            continue to build spaces that serve communities...
+            continue to build spaces that serve communities, support long-term
+            sustainability, and reflect the highest standards of New York City
+            construction.
           </div>
         </div>
 
