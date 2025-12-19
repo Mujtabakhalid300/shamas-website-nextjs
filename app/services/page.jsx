@@ -1,4 +1,7 @@
+"use client"; // Required for Framer Motion in Next.js App Router
+
 import React from "react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -48,23 +51,44 @@ const services = [
   },
 ];
 
-const page = () => {
-  return (
-    <main className={`scroll-smooth min-h-screen bg-gray-50 py-16 px-4`}>
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        {/* <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-            Our Services
-          </h1>
-        </div> */}
+// 1. Define the Container Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // This creates the "one after another" effect
+    },
+  },
+};
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+// 2. Define the Individual Item Variants
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const Page = () => {
+  return (
+    <main className="scroll-smooth min-h-screen bg-gray-50 py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Services Grid with Motion */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible" // Animations trigger when the user scrolls to this section
+          viewport={{ once: true, amount: 0.2 }} // Only play once, when 20% of the grid is visible
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-xl shadow-sm p-8 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300"
+              variants={itemVariants}
+              className="bg-white rounded-xl shadow-sm p-8 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300 border border-gray-100"
             >
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {service.title}
@@ -72,12 +96,12 @@ const page = () => {
               <p className="text-gray-600 leading-relaxed text-sm">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </main>
   );
 };
 
-export default page;
+export default Page;

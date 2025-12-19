@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased scroll-smooth">
         {!isLoaded ? (
           // --- UPDATED LOADING SCREEN START ---
           <div className="flex h-screen w-full items-center justify-center bg-black">
