@@ -1,5 +1,10 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
 import MainPageVideo from "./components/MainPageVideo";
 import ScrollButton from "./components/ScrollButton";
+import Counter from "./components/Counter";
 import Image from "next/image";
 import {
   Gothic_A1,
@@ -28,54 +33,101 @@ const playfair_display = Playfair_Display({
   weight: ["400"],
 });
 
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
 export default function Home() {
   return (
     <main className="relative scroll-smooth">
-      {/* Video Background (Fixed) */}
       <MainPageVideo />
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
-        {/* --- LOGO CONTAINER --- */}
-        {/* 'relative' allows us to anchor the GIF to this box */}
-        {/* 'flex' ensures the SHAMAS logo is the main centered element */}
-        <div className="relative flex items-center justify-center mb-2 z-10">
-          {/* --- GIF (ABSOLUTE POSITIONED) --- */}
-          {/* right-full: Pushes it to the left edge of the container */}
-          {/* top-1/2 -translate-y-1/2: Centers it vertically */}
-          {/* translate-x-8: Pushes it RIGHT by 2rem to create the overlap */}
-          <div className="absolute right-full top-1/2 -translate-y-1/2 translate-x-8 md:translate-x-12">
-            <img
-              src="/Logo_Animation.gif"
-              alt="Logo Animation"
-              width={90}
-              height={158}
-              className="w-[160px] h-[90px] md:w-[90px] md:h-[158px] rounded-md object-cover max-w-none"
+        {/* Logo Container - Now Flex Column to stack GIF above Image */}
+        <div className="relative flex flex-col items-center justify-center mb-2 z-10">
+          {/* 1. Rotating GIF (Positioned ABOVE) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="mb-4" // Added margin bottom to separate from logo
+          >
+            <motion.div
+              animate={{
+                y: [0, -15, 0],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <img
+                src="/Logo_Animation.gif"
+                alt="Logo Animation"
+                width={90}
+                height={158}
+                className="w-[120px] h-[70px] md:w-[90px] md:h-[158px] rounded-md object-cover max-w-none"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* 2. Main Logo Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0.4,
+              ease: "easeOut",
+            }}
+            className="w-3/4 md:max-w-md"
+          >
+            <Image
+              className="object-contain w-full h-auto"
+              src="/navbarLogo.png"
+              alt="Navbar Logo"
+              width={600}
+              height={360}
+              priority
             />
-          </div>
-
-          {/* --- STATIC LOGO (CENTERED) --- */}
-          <Image
-            className="w-3/4 md:max-w-md object-contain"
-            src="/navbarLogo.png"
-            alt="Navbar Logo"
-            width={600}
-            height={360}
-            priority
-          />
+          </motion.div>
         </div>
-        {/* ---------------------- */}
 
-        <h3
-          className={`mt-0 mb-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center mt-4`}
+        {/* 3. Hero Headline */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
         >
-          Defining the Standards of Real Estate Development
-        </h3>
+          <h3
+            className={`mt-0 mb-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center mt-4`}
+          >
+            Defining the Standards of Real Estate Development
+          </h3>
+        </motion.div>
 
-        {/* Scroll Down Button */}
         <ScrollButton sectionName={"img-section"} />
       </section>
-      {/* Next Section */}
+
+      {/* Next Section (Skyline) */}
       <section
         id="img-section"
         className="pt-16 md:pt-32 px-4 relative w-full h-screen bg-[url(/skyline.jpg)] bg-black/60 bg-cover bg-center bg-no-repeat bg-blend-darken flex flex-col items-center"
@@ -107,50 +159,64 @@ export default function Home() {
           COMPANY OVERVIEW
         </div>
 
-        <div className="flex flex-col md:flex-row my-8 gap-10">
-          <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl`}>18 Years</div>
+        <motion.div
+          className="flex flex-col md:flex-row my-8 gap-10"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center md:items-start justify-center"
+          >
+            <div className={`${lora.className} text-7xl`}>
+              <Counter value={18} /> Years
+            </div>
             <div
               className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
-              of track record <br />
+              of track record
             </div>
-          </div>
+          </motion.div>
 
-          <div className="border-black border-[0.1px] w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
-
-          <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl`}>200+</div>
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center md:items-start justify-center"
+          >
+            <div className={`${lora.className} text-7xl`}>
+              <Counter value={200} />+
+            </div>
             <div
               className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
               buildings
             </div>
-          </div>
+          </motion.div>
 
-          <div className="border-black border-[0.1px] w-44 md:h-[8rem] md:w-0 opacity-20 text-center mx-auto"></div>
-
-          <div className="flex flex-col items-center md:items-start justify-center">
-            <div className={`${lora.className} text-7xl`}>2500+</div>
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center md:items-start justify-center"
+          >
+            <div className={`${lora.className} text-7xl`}>
+              <Counter value={2500} />+
+            </div>
             <div
               className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
               Units
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
+        {/* Company Bio Section */}
         <div className="my-16 px-6">
           <div
             className={`${gothic_A1.className} text-justify text-black text-base leading-relaxed max-w-3xl mx-auto`}
           >
             For nearly two decades, Shamas and Hammad, two brothers with a
             shared vision and a hands-on work ethic, have been leading the firm
-            as a trusted general contractor throughout New York City. With 18+
-            years of experience, we specialize in occupied rehabilitations,
-            full-gut renovations, masonry, roofing, and ground-up construction,
-            delivering high-quality results across some of the city’s most
-            challenging and tightly regulated environments..
+            as a trusted general contractor throughout New York City...
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -159,13 +225,7 @@ export default function Home() {
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Our deep understanding of affordable housing and public-sector
-            construction sets us apart. We are proud to be recognized as a
-            respected leader within the industry, with extensive experience
-            working with HUD, UHAB, HPD, and other affiliated programs. Our team
-            is skilled at navigating complex compliance requirements,
-            coordinating with stakeholders, and ensuring that projects remain
-            efficient, safe, and community-focused—especially in occupied
-            buildings where sensitivity and coordination are key.
+            construction sets us apart...
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -174,15 +234,7 @@ export default function Home() {
             className={`${gothic_A1.className} text-black text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             At the core of our work is a commitment to sustainability,
-            innovation, and precision. By integrating advanced engineering
-            solutions, value engineering, and cutting-edge construction
-            technology, we consistently deliver projects on time and within
-            budget while proactively responding to NYC’s evolving landscape of
-            climate mandates and energy-efficiency goals. Our portfolio spans
-            mixed-use developments, affordable housing, and energy-efficient
-            residential projects, resulting in a strong track record of
-            performance, reliability, and lasting value for property owners,
-            partners, and investors.
+            innovation, and precision...
           </div>
 
           <div className="border-t border-gray-600 w-16 mx-auto my-6"></div>
@@ -191,9 +243,7 @@ export default function Home() {
             className={`${gothic_A1.className} text-black font-bold text-base text-justify leading-relaxed max-w-3xl mx-auto`}
           >
             Driven by integrity, craftsmanship, and family leadership, we
-            continue to build spaces that serve communities, support long-term
-            sustainability, and reflect the highest standards of New York City
-            construction.
+            continue to build spaces that serve communities...
           </div>
         </div>
 
