@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import MainPageVideo from "./components/MainPageVideo";
 import ScrollButton from "./components/ScrollButton";
 import Counter from "./components/Counter";
@@ -54,13 +54,39 @@ const itemVariants = {
 };
 
 export default function Home() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Handle Scroll Detection
+  useEffect(() => {
+    const handleScroll = () => {
+      // Logic Update: Show button when scrolled halfway through the viewport (video)
+      // window.innerHeight is the height of the screen/video section
+      // dividing by 2 triggers it at 50% scroll depth of that section
+      if (window.scrollY > window.innerHeight / 2) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <main className="relative scroll-smooth">
       <MainPageVideo />
 
       {/* Hero Section */}
       <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
-        {/* Logo Container - Now Flex Column to stack GIF above Image */}
+        {/* Logo Container - Flex Column to stack GIF above Image */}
         <div className="relative flex flex-col items-center justify-center mb-2 z-10">
           {/* 1. Rotating GIF (Positioned ABOVE) */}
           <motion.div
@@ -82,8 +108,8 @@ export default function Home() {
               <img
                 src="/Logo_Animation.gif"
                 alt="Logo Animation"
-                width={90}
-                height={158}
+                width={150}
+                height={230}
                 className="w-[120px] h-[70px] md:w-[90px] md:h-[158px] rounded-md object-cover max-w-none"
               />
             </motion.div>
@@ -275,6 +301,36 @@ export default function Home() {
           DOWNLOAD THE SHAMAS BROCHURE
         </a>
       </section>
+
+      {/* Floating Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            onClick={scrollToTop}
+            initial={{ opacity: 0, scale: 0.5, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-originalBlue hover:bg-navbarFocusBlue text-white shadow-lg focus:outline-none transition-colors duration-300"
+            aria-label="Scroll to top"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              />
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
