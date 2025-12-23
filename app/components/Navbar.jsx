@@ -16,7 +16,7 @@ const Navbar = () => {
     { name: "OVERVIEW", href: "/" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "SERVICES", href: "/services" },
-    // { name: "MANAGEMENT", href: "/management" },
+    { name: "JOIN SHAMAS", href: "/joinshamas" },
     { name: "CONTACT", href: "/contact" },
     { name: "WORK WITH US", href: "/form" },
     { name: "TESTIMONIALS", href: "/testimonials" },
