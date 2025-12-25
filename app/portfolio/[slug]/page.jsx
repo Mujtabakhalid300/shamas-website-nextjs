@@ -1,13 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { use } from "react"; // Combined imports
 import Slider from "react-slick";
-import { use } from "react";
+import { motion } from "framer-motion"; // Import Framer Motion
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { PROPERTIES } from "@/data/projectsData";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+// --- ANIMATION VARIANTS ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3, // Delay between Text and Image loading
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 // Convert title -> slug format
 const createSlug = (text) =>
@@ -44,7 +65,11 @@ export default function PortfolioPage({ params }) {
   const project = PROPERTIES.find((p) => createSlug(p.title) === slug);
 
   if (!project)
-    return <div className="text-center py-20">Project Not Found</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-500 font-serif">
+        Project Not Found
+      </div>
+    );
 
   // Create full image array (main + additional)
   const projectImages = [project.image, ...(project.images || [])];
@@ -61,19 +86,18 @@ export default function PortfolioPage({ params }) {
   };
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center bg-white lg:px-12 lg:pb-12">
-      {/* Changed items-center to items-start here */}
+    <motion.main
+      className="min-h-screen w-full flex items-center justify-center bg-white lg:px-12 lg:pb-12"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <div className="max-w-[1200px] w-full grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12 items-start">
-        {/* --- TEXT DETAILS --- */}
-        {/* Removed md:-mt-8 since items-start handles the alignment now */}
-        <div className="flex flex-col items-center text-center mx-auto max-w-lg md:col-span-3">
-          {/* <span className="font-serif text-lg text-black mb-2">
-            {project.category || "Property"}
-          </span> */}
-
-          {/* <div className="w-16 h-[1px] bg-black mb-8"></div> */}
-
-          {/* Added mt-0 or a small mt-2 here if you need to optically align the font cap-height with the image */}
+        {/* --- TEXT DETAILS (Animates First) --- */}
+        <motion.div
+          className="flex flex-col items-center text-center mx-auto max-w-lg md:col-span-3"
+          variants={itemVariants}
+        >
           <h1 className="font-serif text-5xl lg:text-6xl text-black mb-4 leading-tight mt-0">
             {project.title}
           </h1>
@@ -82,10 +106,13 @@ export default function PortfolioPage({ params }) {
             {project.description ||
               "Detailed project description is currently not available."}
           </p>
-        </div>
+        </motion.div>
 
-        {/* --- IMAGE CAROUSEL --- */}
-        <div className="w-full relative px-8 md:px-0 md:col-span-2 md:max-w-[325px] mx-auto">
+        {/* --- IMAGE CAROUSEL (Animates Second) --- */}
+        <motion.div
+          className="w-full relative px-8 md:px-0 md:col-span-2 md:max-w-[325px] mx-auto"
+          variants={itemVariants}
+        >
           <Slider {...settings}>
             {projectImages.map((img, idx) => (
               <div key={idx} className="outline-none">
@@ -99,8 +126,8 @@ export default function PortfolioPage({ params }) {
               </div>
             ))}
           </Slider>
-        </div>
+        </motion.div>
       </div>
-    </main>
+    </motion.main>
   );
 }

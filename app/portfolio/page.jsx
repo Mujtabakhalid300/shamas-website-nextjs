@@ -1,21 +1,20 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 import { PROPERTIES } from "@/data/projectsData";
 
 // --- 1. CONFIGURATION ---
 const MAP_WIDTH = 598;
 const MAP_HEIGHT = 767;
 
-// ✅ NEW: Centralized Map Image Configuration
-// Simply add new filters here as "Key": "Image Path"
 const MAP_IMAGES = {
-  All: "/map.jpeg", // Default map
+  All: "/map.jpeg",
   Manhattan: "/manhattan_map.jpg",
-  Bronx: "/bronx_map.jpg", // Example: easy to add in future
+  Bronx: "/bronx_map.jpg",
   Queens: "/queens_map.jpg",
-  // "Brooklyn": "/brooklyn_map.jpg",
 };
 
 const MAP_REGIONS = [
@@ -29,7 +28,37 @@ const MAP_REGIONS = [
   },
 ];
 
-// --- 2. HELPER FUNCTIONS ---
+// --- 2. ANIMATION VARIANTS ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Delay between each project card
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const mapVariants = {
+  hidden: { opacity: 0, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+// --- 3. HELPER FUNCTIONS ---
 const getThumbnailUrl = (originalUrl) => {
   if (!originalUrl.includes("cloudinary.com")) {
     return originalUrl.includes("?")
@@ -43,17 +72,13 @@ const getThumbnailUrl = (originalUrl) => {
 
 const FILTERS = ["All", "Bronx", "Manhattan", "Queens", "S.I", "Brooklyn"];
 
-// --- 3. MAIN COMPONENT ---
+// --- 4. MAIN COMPONENT ---
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeRegion, setActiveRegion] = useState(null);
 
-  // ✅ SCALABLE LOGIC:
-  // Look up the image for the current filter.
-  // If no specific image exists for that filter, fallback to "All" (the default map).
   const mapImageSrc = MAP_IMAGES[activeFilter] || MAP_IMAGES["All"];
 
-  // Reset active region when filter changes
   useEffect(() => {
     setActiveRegion(null);
   }, [activeFilter]);
@@ -106,59 +131,91 @@ export default function PortfolioPage() {
           <div className="flex flex-col md:flex-row min-h-screen w-full">
             {/* LEFT SIDE: Property List */}
             <div className="w-full md:w-1/2 bg-white">
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 p-6 md:p-10">
+              {/* We use key={activeFilter} here. 
+                When filter changes, React unmounts and remounts this list,
+                triggering the staggered animation from scratch.
+              */}
+              <motion.div
+                key={activeFilter}
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8 p-6 md:p-10"
+              >
                 {filteredProperties.map((property) => (
-                  <Link
-                    href={`/portfolio/${property.title
-                      .toLowerCase()
-                      .replace(/[^a-z0-9]+/g, "-")}`}
-                    key={property.id}
-                    className="group cursor-pointer flex flex-col"
-                  >
-                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
-                      <Image
-                        src={getThumbnailUrl(property.image)}
-                        alt={property.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-gothic z-10">
-                        Completed
+                  <motion.div key={property.id} variants={cardVariants}>
+                    <Link
+                      href={`/portfolio/${property.title
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, "-")}`}
+                      className="group cursor-pointer flex flex-col"
+                    >
+                      <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 mb-3">
+                        <Image
+                          src={getThumbnailUrl(property.image)}
+                          alt={property.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-white/90 text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-gothic z-10">
+                          Completed
+                        </div>
                       </div>
-                    </div>
-                    <div className="text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center font-gothic">
-                      {property.title}
-                    </div>
-                  </Link>
+                      <div className="text-black text-[10px] font-bold uppercase tracking-widest py-2 text-center font-gothic">
+                        {property.title}
+                      </div>
+                    </Link>
+                  </motion.div>
                 ))}
 
                 {filteredProperties.length === 0 && (
-                  <div className="col-span-full py-20 text-center text-gray-400 font-gothic">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="col-span-full py-20 text-center text-gray-400 font-gothic"
+                  >
                     No properties found in **{activeFilter}**
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             </div>
 
             {/* --- RIGHT SIDE: INTERACTIVE MAP --- */}
             <div className="hidden md:flex w-1/2 h-screen sticky top-0 items-center justify-center p-10 bg-white">
-              <div className="relative w-full max-h-full aspect-[598/767] overflow-hidden rounded-lg bg-gray-50 shadow-lg group">
-                {/* 1. Base Image - Dynamic Src from MAP_IMAGES */}
-                <Image
-                  key={mapImageSrc}
-                  src={mapImageSrc}
-                  alt={`${activeFilter} Map`}
-                  fill
-                  className="object-cover transition-opacity duration-300"
-                  priority
-                />
+              {/* Animate the map container slightly when mounting */}
+              <motion.div
+                className="relative w-full max-h-full aspect-[598/767] overflow-hidden rounded-lg bg-gray-50 shadow-lg group"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              >
+                {/* 1. Base Image - Animate switch with AnimatePresence */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={mapImageSrc} // Unique key triggers animation on change
+                    variants={mapVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit={{ opacity: 0 }}
+                    className="absolute inset-0 w-full h-full"
+                  >
+                    <Image
+                      src={mapImageSrc}
+                      alt={`${activeFilter} Map`}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
                 <div className="absolute inset-0 bg-black/5 pointer-events-none" />
 
                 {/* 2. SVG Overlay */}
                 <svg
                   viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
-                  className="absolute inset-0 w-full h-full"
+                  className="absolute inset-0 w-full h-full z-10" // z-10 to sit above image
                   preserveAspectRatio="none"
                 >
                   {MAP_REGIONS.map((region) => (
@@ -174,29 +231,35 @@ export default function PortfolioPage() {
                 </svg>
 
                 {/* 3. DYNAMIC TOOLTIP */}
-                {activeRegion && (
-                  <div
-                    className="absolute z-50 pointer-events-none flex flex-col items-center justify-center"
-                    style={{
-                      left: `${(activeRegion.x / MAP_WIDTH) * 100}%`,
-                      top: `${(activeRegion.y / MAP_HEIGHT) * 100}%`,
-                      transform: "translate(-50%, -100%) translateY(-12px)",
-                    }}
-                  >
-                    <div className="bg-[#1a2533] text-white px-3 py-2 rounded shadow-xl flex flex-col items-center min-w-[120px] animate-in fade-in zoom-in duration-200">
-                      <span className="text-[10px] font-bold uppercase tracking-wider font-gothic">
-                        {activeRegion.label}
-                      </span>
-                      {activeRegion.subLabel && (
-                        <span className="text-[9px] text-gray-300 mt-0.5">
-                          {activeRegion.subLabel}
+                <AnimatePresence>
+                  {activeRegion && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 5, scale: 0.9 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute z-50 pointer-events-none flex flex-col items-center justify-center"
+                      style={{
+                        left: `${(activeRegion.x / MAP_WIDTH) * 100}%`,
+                        top: `${(activeRegion.y / MAP_HEIGHT) * 100}%`,
+                        transform: "translate(-50%, -100%) translateY(-12px)",
+                      }}
+                    >
+                      <div className="bg-[#1a2533] text-white px-3 py-2 rounded shadow-xl flex flex-col items-center min-w-[120px]">
+                        <span className="text-[10px] font-bold uppercase tracking-wider font-gothic">
+                          {activeRegion.label}
                         </span>
-                      )}
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1a2533] rotate-45"></div>
-                    </div>
-                  </div>
-                )}
-              </div>
+                        {activeRegion.subLabel && (
+                          <span className="text-[9px] text-gray-300 mt-0.5">
+                            {activeRegion.subLabel}
+                          </span>
+                        )}
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1a2533] rotate-45"></div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </div>
           </div>
         </div>
