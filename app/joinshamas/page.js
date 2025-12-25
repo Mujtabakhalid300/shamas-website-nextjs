@@ -1,93 +1,162 @@
 "use client";
-import { useState, useRef } from "react";
+
+import { useState, useRef, useTransition } from "react";
+import { motion } from "framer-motion"; // Import Framer Motion
+import { Loader2 } from "lucide-react";
+// IMPORT FROM THE SEPARATE FILE
+import { submitApplication } from "./actions";
+
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delays between form sections
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 export default function JoinUsPage() {
   const formRef = useRef(null);
-  const [statusMessage, setStatusMessage] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const [statusMessage, setStatusMessage] = useState({ type: "", text: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    setStatusMessage({ type: "", text: "" });
 
-    // Debugging: Console log the file object to ensure it captures
-    // const cvFile = formData.get('resume');
-    // console.log(cvFile);
+    startTransition(async () => {
+      const result = await submitApplication(formData);
 
-    // TODO: Connect this to your backend API to upload the file and data
-    setStatusMessage(
-      "Application submitted successfully! Our HR team will review your profile and contact you shortly."
-    );
-    formRef.current?.reset();
+      if (result.success) {
+        setStatusMessage({ type: "success", text: result.message });
+        formRef.current?.reset();
+      } else {
+        setStatusMessage({ type: "error", text: result.message });
+      }
+    });
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-originalBlue to-black py-12 px-6">
-      <div className="max-w-4xl mx-auto bg-white/5 border border-gray-700 p-8 rounded-md">
-        <h1 className="text-3xl font-bold text-white mb-4 text-center">
-          Join Our Team
-        </h1>
-        <p className="text-gray-300 text-center mb-8">
-          We are always looking for talented individuals to help us build the
-          future. Fill out the form below and attach your CV to apply.
-        </p>
+      <motion.div
+        className="max-w-4xl mx-auto bg-white/5 border border-gray-700 p-8 rounded-md"
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h1 className="text-3xl font-bold text-white mb-4 text-center">
+            Join Our Team
+          </h1>
+          <p className="text-gray-300 text-center mb-8">
+            We are always looking for talented individuals to help us build the
+            future. Fill out the form below to apply.
+          </p>
+        </motion.div>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
-          {/* 1. Personal Details */}
-          <div>
+        {/* Form Container with Staggered Children */}
+        <motion.form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* --- HONEYPOT FIELD (INVISIBLE) --- */}
+          <input
+            type="text"
+            name="website_url"
+            style={{ display: "none" }}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+
+          {/* 1. Applicant Details */}
+          <motion.div variants={itemVariants}>
             <h2 className="text-xl font-semibold text-white mb-4">
-              1. Personal Details
+              1. Applicant Details
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Name */}
               <input
                 type="text"
                 name="fullName"
                 placeholder="Full Name*"
                 required
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
+                disabled={isPending}
+                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
               />
+
+              {/* Email */}
               <input
                 type="email"
                 name="email"
                 placeholder="Email Address*"
                 required
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
+                disabled={isPending}
+                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
               />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number*"
-                required
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
-              />
+
+              {/* Location */}
               <input
                 type="text"
                 name="location"
-                placeholder="City, State/Province"
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
-              />
-            </div>
-          </div>
-
-          {/* 2. Professional Info */}
-          <div>
-            <h2 className="text-xl font-semibold text-white mb-4">
-              2. Professional Information
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                type="text"
-                name="position"
-                placeholder="Position Applied For*"
+                placeholder="City, State/Province*"
                 required
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
+                disabled={isPending}
+                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors disabled:opacity-50"
               />
+
+              {/* Position Dropdown */}
               <select
-                name="experienceLevel"
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:border-white transition-colors"
+                name="position"
+                required
+                disabled={isPending}
+                className="p-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:border-white transition-colors disabled:opacity-50"
                 defaultValue=""
               >
                 <option value="" disabled className="bg-black text-gray-400">
-                  Years of Experience
+                  Select Position*
+                </option>
+                <option value="Project Manager" className="bg-black">
+                  Project Manager
+                </option>
+                <option value="Assistant Project Manager" className="bg-black">
+                  Assistant Project Manager
+                </option>
+                <option value="Site Supervisor" className="bg-black">
+                  Site Supervisor
+                </option>
+              </select>
+
+              {/* Experience Dropdown */}
+              <select
+                name="experienceLevel"
+                required
+                disabled={isPending}
+                className="p-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:border-white transition-colors md:col-span-2 disabled:opacity-50"
+                defaultValue=""
+              >
+                <option value="" disabled className="bg-black text-gray-400">
+                  Years of Experience*
                 </option>
                 <option value="entry" className="bg-black">
                   Entry Level (0-2 years)
@@ -102,68 +171,76 @@ export default function JoinUsPage() {
                   Lead / Manager
                 </option>
               </select>
-              <input
-                type="url"
-                name="linkedin"
-                placeholder="LinkedIn Profile URL"
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
-              />
-              <input
-                type="url"
-                name="portfolio"
-                placeholder="Portfolio"
-                className="p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors"
-              />
             </div>
-          </div>
+          </motion.div>
 
-          {/* 3. Resume / CV Upload */}
-          <div>
+          {/* 2. Resume Upload */}
+          <motion.div variants={itemVariants}>
             <h2 className="text-xl font-semibold text-white mb-2">
-              3. Upload Resume/CV
+              2. Upload Resume/CV
             </h2>
             <p className="text-gray-400 text-sm mb-4">
               Please upload your updated CV in PDF or DOCX format.
             </p>
-            <div className="relative">
-              <input
-                type="file"
-                name="resume"
-                accept=".pdf,.doc,.docx"
-                required
-                className="w-full p-3 bg-transparent border border-gray-600 text-white rounded-md file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer"
-              />
-            </div>
-          </div>
+            <input
+              type="file"
+              name="resume"
+              accept=".pdf,.doc,.docx"
+              required
+              disabled={isPending}
+              className="w-full p-3 bg-transparent border border-gray-600 text-white rounded-md file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600 cursor-pointer disabled:opacity-50"
+            />
+            {/* --- ADDED NOTE --- */}
+            <p className="text-xs text-gray-400 mt-2">Max 1MB per file</p>
+          </motion.div>
 
-          {/* 4. Cover Letter */}
-          <div>
+          {/* 3. Cover Letter */}
+          <motion.div variants={itemVariants}>
             <h2 className="text-xl font-semibold text-white mb-4">
-              4. Cover Letter
+              3. Cover Letter
             </h2>
             <textarea
               name="coverLetter"
               rows="5"
+              disabled={isPending}
               placeholder="Tell us why you want to join our team and what makes you a good fit..."
-              className="w-full p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors resize-y"
+              className="w-full p-3 bg-transparent border border-gray-600 text-white rounded-md placeholder-gray-400 focus:outline-none focus:border-white transition-colors resize-y disabled:opacity-50"
             ></textarea>
-          </div>
+          </motion.div>
 
           {/* Submit Button */}
-          <button
+          <motion.button
+            variants={itemVariants}
             type="submit"
-            className="w-full bg-navbarFocusBlue hover:bg-originalBlue text-white font-bold py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-blue-900/20"
+            disabled={isPending}
+            className="w-full bg-navbarFocusBlue hover:bg-originalBlue text-white font-bold py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-blue-900/20 flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Submit Application
-          </button>
-        </form>
+            {isPending ? (
+              <>
+                <Loader2 className="animate-spin" size={20} />
+                Submitting...
+              </>
+            ) : (
+              "Submit Application"
+            )}
+          </motion.button>
+        </motion.form>
 
-        {statusMessage && (
-          <div className="mt-6 p-4 bg-green-900/30 border border-green-600 text-green-400 rounded-md text-center">
-            {statusMessage}
-          </div>
+        {/* Status Message Display */}
+        {statusMessage.text && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className={`mt-6 p-4 rounded-md text-center font-medium ${
+              statusMessage.type === "error"
+                ? "bg-red-900/30 border border-red-600 text-red-400"
+                : "bg-green-900/30 border border-green-600 text-green-400"
+            }`}
+          >
+            {statusMessage.text}
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,8 +1,38 @@
 "use client";
+
 import { useState, useRef, useTransition } from "react";
-// Added Navigation to imports
+import { motion } from "framer-motion"; // Added framer-motion
 import { Mail, Phone, MapPin, Loader2, Navigation } from "lucide-react";
 import { sendEmail } from "./actions";
+
+// Animation Variants (Consistent with your Home Page)
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delays the form appearance slightly after contact info
+      delayChildren: 0.3, // Waits for background to load a bit
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const backgroundVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 1.2, ease: "easeOut" },
+  },
+};
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
@@ -29,8 +59,13 @@ export default function ContactPage() {
 
   return (
     <div className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gray-900 font-sans">
-      {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
+      {/* Background Image - Smooth Fade In */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        variants={backgroundVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <img
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop"
           alt="City Background"
@@ -38,13 +73,21 @@ export default function ContactPage() {
         />
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/80"></div>
-      </div>
+      </motion.div>
 
-      {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-4 py-12">
+      {/* Main Content - Staggered Grid */}
+      <motion.div
+        className="relative z-10 container mx-auto px-4 py-12"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           {/* Left Column: Contact Info */}
-          <div className="space-y-8 pl-4 lg:pl-12">
+          <motion.div
+            className="space-y-8 pl-4 lg:pl-12"
+            variants={itemVariants}
+          >
             {/* Address Section */}
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black">
@@ -57,9 +100,9 @@ export default function ContactPage() {
                 <p className="text-gray-300">10 West Main St. Elmsford </p>
                 <p className="text-gray-300">New York 10523, Suite 200</p>
 
-                {/* --- NEW DIRECTIONS LINK --- */}
+                {/* --- DIRECTIONS LINK --- */}
                 <a
-                  href="https://maps.app.goo.gl/vdeZkeAfuf5q1f3d6" // Dummy Link
+                  href="https://maps.app.goo.gl/vdeZkeAfuf5q1f3d6"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-4 text-[#00bcd4] hover:text-[#00acc1] transition-colors group"
@@ -72,7 +115,6 @@ export default function ContactPage() {
                     Get Directions
                   </span>
                 </a>
-                {/* --------------------------- */}
               </div>
             </div>
 
@@ -98,10 +140,13 @@ export default function ContactPage() {
                 <p className="text-gray-300">info@shamas.us</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Contact Form */}
-          <div className="bg-transparent border border-gray-400 p-8 md:p-10 rounded-sm w-full">
+          <motion.div
+            className="bg-transparent border border-gray-400 p-8 md:p-10 rounded-sm w-full"
+            variants={itemVariants}
+          >
             <h2 className="text-3xl font-bold text-white mb-8">Send Message</h2>
 
             <form
@@ -117,7 +162,6 @@ export default function ContactPage() {
                 tabIndex={-1}
                 autoComplete="off"
               />
-              {/* ---------------------------------- */}
 
               {/* Full Name */}
               <div className="relative">
@@ -207,9 +251,9 @@ export default function ContactPage() {
                 {statusMessage.text}
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
