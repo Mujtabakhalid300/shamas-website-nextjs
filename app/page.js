@@ -85,9 +85,9 @@ export default function Home() {
       <MainPageVideo />
 
       {/* Hero Section */}
-      <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-105px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
+      <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-132px)] flex flex-col items-center  bg-black bg-opacity-40">
         {/* Logo Container - Flex Column to stack GIF above Image */}
-        <div className="relative flex flex-col items-center justify-center mb-2 z-10">
+        <div className="relative flex flex-col items-center justify-center mb-2 z-10 mt-20">
           {/* 1. Rotating GIF (Positioned ABOVE) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -105,12 +105,13 @@ export default function Home() {
                 ease: "easeInOut",
               }}
             >
-              <img
+              <Image
                 src="/Logo_Animation.gif"
                 alt="Logo Animation"
-                width={150}
-                height={230}
-                className="w-[120px] h-[70px] md:w-[90px] md:h-[158px] rounded-md object-cover max-w-none"
+                width={400} // Default/Large screen width
+                height={400} // Default/Large screen height
+                className="w-[300px] h-[300px] sm:w-[300px] sm:h-[300px] rounded-md object-cover max-w-none"
+                unoptimized={true} // Required for GIFs to animate properly in Next.js
               />
             </motion.div>
           </motion.div>
