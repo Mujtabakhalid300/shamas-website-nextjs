@@ -204,7 +204,7 @@ export default function PortfolioPage() {
                       src={mapImageSrc}
                       alt={`${activeFilter} Map`}
                       fill
-                      className="object-cover"
+                      className=""
                       priority
                     />
                   </motion.div>
