@@ -198,12 +198,12 @@ export default function Home() {
             className="flex flex-col items-center md:items-start justify-center"
           >
             <div className={`${lora.className} text-7xl`}>
-              <Counter value={18} /> Years
+              <Counter value={18} />+
             </div>
             <div
               className={`${gothic_A1.className} font-[100] text-base text-center max-w-3xl mx-auto`}
             >
-              of track record
+              Years of track record
             </div>
           </motion.div>
 
