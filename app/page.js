@@ -83,17 +83,19 @@ export default function Home() {
   return (
     <main className="relative scroll-smooth">
       <MainPageVideo />
-
       {/* Hero Section */}
-      <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-132px)] flex flex-col items-center  bg-black bg-opacity-40">
-        {/* Logo Container - Flex Column to stack GIF above Image */}
-        <div className="relative flex flex-col items-center justify-center mb-2 z-10 mt-20">
+      {/* CHANGE 1: Added 'justify-center' to vertically align content automatically */}
+      {/* CHANGE 2: Removed 'items-center' here if you want full width control, but kept it for centering children */}
+      <section className="px-4 relative w-full h-[calc(100vh-32px)] md:h-[calc(100vh-132px)] flex flex-col items-center justify-center bg-black bg-opacity-40">
+        {/* Logo Container */}
+        {/* CHANGE 3: Removed 'mt-20'. The parent 'justify-center' handles the spacing now. */}
+        <div className="relative flex flex-col items-center justify-center mb-2 z-10">
           {/* 1. Rotating GIF (Positioned ABOVE) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="mb-4" // Added margin bottom to separate from logo
+            className="mb-4"
           >
             <motion.div
               animate={{
@@ -105,13 +107,17 @@ export default function Home() {
                 ease: "easeInOut",
               }}
             >
+              {/* CHANGE 4: Made width/height responsive. 
+                  - Default (Mobile/Small Laptop): 220px
+                  - Large Screens (lg): 300px 
+              */}
               <Image
                 src="/Logo_Animation.gif"
                 alt="Logo Animation"
-                width={400} // Default/Large screen width
-                height={400} // Default/Large screen height
-                className="w-[300px] h-[300px] sm:w-[300px] sm:h-[300px] rounded-md object-cover max-w-none"
-                unoptimized={true} // Required for GIFs to animate properly in Next.js
+                width={400}
+                height={400}
+                className="w-[220px] h-[220px] lg:w-[300px] lg:h-[300px] rounded-md object-cover max-w-none"
+                unoptimized={true}
               />
             </motion.div>
           </motion.div>
@@ -125,7 +131,8 @@ export default function Home() {
               delay: 0.4,
               ease: "easeOut",
             }}
-            className="w-3/4 md:max-w-md"
+            // CHANGE 5: Adjusted width constraints for better scaling on laptops
+            className="w-[80%] md:w-[60%] lg:max-w-md"
           >
             <Image
               className="object-contain w-full h-auto"
@@ -145,7 +152,7 @@ export default function Home() {
           transition={{ duration: 1, delay: 0.6 }}
         >
           <h3
-            className={`mt-0 mb-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-xl md:text-3xl text-center mt-4`}
+            className={`mt-0 mb-2 ${gothic_A1.className} font-[400] tracking-wide text-white text-lg md:text-2xl lg:text-3xl text-center mt-4`}
           >
             Defining the Standards of Real Estate Development
           </h3>
