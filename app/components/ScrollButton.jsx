@@ -13,7 +13,7 @@ export default function ScrollButton({ sectionName, bottom }) {
     <>
       <button
         onClick={handleScroll}
-        className={`absolute -bottom-[0.25rem]   text-white bg-opacity-50 `}
+        className={`absolute -bottom-5   text-white bg-opacity-50 `}
       >
         <ChevronDown size={100} strokeWidth={0.75} />
       </button>
