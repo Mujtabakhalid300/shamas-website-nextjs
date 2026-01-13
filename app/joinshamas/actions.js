@@ -1,7 +1,6 @@
 "use server";
-import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { MailtrapClient } from "mailtrap";
 
 export async function submitApplication(formData) {
   // 1. HONEYPOT CHECK
@@ -26,15 +25,37 @@ export async function submitApplication(formData) {
 
   try {
     // 4. Process File Attachment
-    // Convert the File object (from FormData) into a Buffer for Resend
-    const arrayBuffer = await resumeFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    // Mailtrap expects attachments as { filename: string, content: Buffer }
+    const attachments = [];
 
-    // 5. Send Email with Attachment
-    const data = await resend.emails.send({
-      from: "Careers <onboarding@resend.dev>",
-      to: "mujtabakhalid20@gmail.com",
-      reply_to: email,
+    if (resumeFile && resumeFile.size > 0 && resumeFile.name !== "undefined") {
+      const arrayBuffer = await resumeFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      attachments.push({ filename: resumeFile.name, content: buffer });
+    }
+
+    // 5. Initialize Mailtrap
+    const client = new MailtrapClient({
+      token: process.env.MAILTRAP_TOKEN,
+    });
+
+    const sender = {
+      // NOTE: Use 'hello@demomailtrap.co' for the free/demo tier.
+      // If you have a verified domain, use that instead.
+      email: "hello@demomailtrap.co",
+      name: "Job Application System",
+    };
+
+    const recipients = [
+      {
+        email: process.env.MAILTRAP_TO_EMAIL,
+      },
+    ];
+
+    // 6. Send Email
+    await client.send({
+      from: sender,
+      to: recipients,
       subject: `Job Application: ${position} - ${fullName}`,
       html: `
         <h2>New Job Application</h2>
@@ -51,21 +72,13 @@ export async function submitApplication(formData) {
             : "No cover letter provided."
         }</p>
       `,
-      attachments: [
-        {
-          filename: resumeFile.name,
-          content: buffer,
-        },
-      ],
+      attachments: attachments,
+      // FIXED: Use 'headers' for Reply-To
+      headers: {
+        "Reply-To": `${fullName} <${email}>`,
+        "X-Priority": "1",
+      },
     });
-
-    if (data.error) {
-      console.error("Resend Error:", data.error);
-      return {
-        success: false,
-        message: "Failed to submit application. Please try again.",
-      };
-    }
 
     return {
       success: true,
@@ -73,10 +86,10 @@ export async function submitApplication(formData) {
         "Application submitted successfully! HR will contact you shortly.",
     };
   } catch (error) {
-    console.error("Server Error:", error);
+    console.error("Mailtrap Error:", error);
     return {
       success: false,
-      message: "Something went wrong. Please try again.",
+      message: "Failed to submit application. Please try again.",
     };
   }
 }

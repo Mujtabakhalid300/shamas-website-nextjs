@@ -1,7 +1,6 @@
 "use server";
-import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { MailtrapClient } from "mailtrap";
 
 export async function submitPrequalification(formData) {
   // 1. HONEYPOT CHECK
@@ -11,6 +10,7 @@ export async function submitPrequalification(formData) {
 
   try {
     // 2. Extract Files & Prepare Attachments
+    // Mailtrap expects attachments as { filename: string, content: Buffer }
     const attachments = [];
 
     // Helper to process a single file
@@ -35,19 +35,23 @@ export async function submitPrequalification(formData) {
     await processFile(formData.get("signatureFile"));
 
     // 3. Construct HTML Email Body
-    // We categorize the data for readability in the email
     const getVal = (name) => formData.get(name) || "-";
+
+    // Extract key contact info for the email header
+    const companyName = getVal("companyName");
+    const contactEmail = getVal("email");
+    const contactName = getVal("contactPersonTitle"); // Assuming this is name + title or just name
 
     const emailHtml = `
       <h1>Contractor Prequalification Application</h1>
       
       <h2>1. Company Information</h2>
-      <p><strong>Company Name:</strong> ${getVal("companyName")}</p>
+      <p><strong>Company Name:</strong> ${companyName}</p>
       <p><strong>DBA:</strong> ${getVal("dba")}</p>
       <p><strong>Address:</strong> ${getVal("address")}</p>
       <p><strong>Contact/Title:</strong> ${getVal("contactPersonTitle")}</p>
       <p><strong>Phone:</strong> ${getVal("phone")}</p>
-      <p><strong>Email:</strong> ${getVal("email")}</p>
+      <p><strong>Email:</strong> ${contactEmail}</p>
       <p><strong>Work Type:</strong> ${getVal("workType")}</p>
       <p><strong>Years in Business:</strong> ${getVal("yearsBusiness")}</p>
       <p><strong>Areas Served:</strong> ${getVal("areasServed")}</p>
@@ -108,23 +112,36 @@ export async function submitPrequalification(formData) {
       <p><strong>Date:</strong> ${getVal("signatureDate")}</p>
     `;
 
-    // 4. Send Email
-    const data = await resend.emails.send({
-      from: "Prequalification <onboarding@resend.dev>",
-      to: "mujtabakhalid20@gmail.com",
-      reply_to: getVal("email"),
-      subject: `New Contractor Application: ${getVal("companyName")}`,
-      html: emailHtml,
-      attachments: attachments,
+    // 4. Initialize Mailtrap
+    const client = new MailtrapClient({
+      token: process.env.MAILTRAP_TOKEN,
     });
 
-    if (data.error) {
-      console.error("Resend Error:", data.error);
-      return {
-        success: false,
-        message: "Failed to submit application. Please try again.",
-      };
-    }
+    const sender = {
+      // NOTE: Using the demo sender. If you have a verified domain, change this.
+      email: "hello@demomailtrap.co",
+      name: "Contractor Prequalification",
+    };
+
+    const recipients = [
+      {
+        email: process.env.MAILTRAP_TO_EMAIL,
+      },
+    ];
+
+    // 5. Send Email
+    await client.send({
+      from: sender,
+      to: recipients,
+      subject: `New Contractor Application: ${companyName}`,
+      text: `A new application has been received from ${companyName}. Please view this email in an HTML-compatible client.`,
+      html: emailHtml,
+      attachments: attachments,
+      headers: {
+        "Reply-To": `${contactName} <${contactEmail}>`,
+        "X-Priority": "1", // Optional: Mark as high priority
+      },
+    });
 
     return {
       success: true,
@@ -132,10 +149,10 @@ export async function submitPrequalification(formData) {
         "Application submitted successfully! We will review and contact you shortly.",
     };
   } catch (error) {
-    console.error("Server Error:", error);
+    console.error("Mailtrap Error:", error);
     return {
       success: false,
-      message: "Something went wrong. Please try again.",
+      message: "Failed to submit application. Please try again.",
     };
   }
 }
