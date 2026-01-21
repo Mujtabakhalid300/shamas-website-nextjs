@@ -19,7 +19,7 @@ const Navbar = () => {
     { name: "JOIN SHAMAS", href: "/joinshamas" },
     { name: "CONTACT", href: "/contact" },
     { name: "WORK WITH US", href: "/form" },
-    { name: "TESTIMONIALS", href: "/testimonials" },
+    // { name: "TESTIMONIALS", href: "/testimonials" },
   ];
 
   // Simplified Mobile Variants (No scaling or long durations)
